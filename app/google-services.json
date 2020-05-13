@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "376683232669",
-    "firebase_url": "https://preventionapp-5e99b.firebaseio.com",
-    "project_id": "preventionapp-5e99b",
-    "storage_bucket": "preventionapp-5e99b.appspot.com"
+    "project_number": "548924018028",
+    "firebase_url": "https://preventionapp-e5b4f.firebaseio.com",
+    "project_id": "preventionapp-e5b4f",
+    "storage_bucket": "preventionapp-e5b4f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:376683232669:android:4e1c518b6d51db49668374",
+        "mobilesdk_app_id": "1:548924018028:android:03b38802ebca4a2cd37749",
         "android_client_info": {
           "package_name": "com.example.preventionapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "376683232669-fgnth3e0quhgqvcs1i3smbjmelceve48.apps.googleusercontent.com",
+          "client_id": "548924018028-tu9o4m6j6gjvmtrf75n2gsv1cgasv84b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.preventionapp",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "376683232669-hvfk5pd9fibodsq17kmp4ie0gjcsrmub.apps.googleusercontent.com",
+          "client_id": "548924018028-nbnj14vn94r7ildugjj8hvhgngor9ras.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBXlD1KKPV-IT6L5fhwjviMjGTnT5PSw7U"
+          "current_key": "AIzaSyBAR9WGyBHXe8r6SAlQW-E8NLqcmiE072Q"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "376683232669-hvfk5pd9fibodsq17kmp4ie0gjcsrmub.apps.googleusercontent.com",
+              "client_id": "548924018028-nbnj14vn94r7ildugjj8hvhgngor9ras.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
