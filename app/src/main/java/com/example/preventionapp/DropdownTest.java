@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.Display;
 import android.widget.ExpandableListView;
 
-import com.example.preventationapp.R;
-
 import java.util.ArrayList;
 
 public class DropdownTest extends Activity {
@@ -15,6 +13,7 @@ public class DropdownTest extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preventioninfo);
+
         Display newDisplay = getWindowManager().getDefaultDisplay();
         int width = newDisplay.getWidth();
 

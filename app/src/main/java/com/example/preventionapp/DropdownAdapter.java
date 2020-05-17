@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.example.preventationapp.R;
 
 import java.util.ArrayList;
 
@@ -22,10 +21,10 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
     private LayoutInflater myinf = null;
 
     public DropdownAdapter(Context context, int groupLay, int chlidLay, ArrayList<myGroup> DataList){
+        this.context = context;
         this.DataList = DataList;
         this.groupLayout = groupLay;
         this.chlidLayout = chlidLay;
-        this.context = context;
         this.myinf = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 

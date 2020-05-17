@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "548924018028-qn1h7thb6d6462hdk6ktno96aug1udn7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.preventionapp",
+            "certificate_hash": "32e635c663b31ccabc3a99cf75cea921fec2f466"
+          }
+        },
+        {
           "client_id": "548924018028-tu9o4m6j6gjvmtrf75n2gsv1cgasv84b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

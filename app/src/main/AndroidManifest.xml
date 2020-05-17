@@ -10,15 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".DropdownTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DropdownTest"/>
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".DropdownAdapter"/>
+        <activity android:name=".LoginActivity">
+
+        </activity>
         <activity android:name=".SignupActivity"/>
+        <activity android:name=".myGroup"/>
+
     </application>
 
 </manifest>
