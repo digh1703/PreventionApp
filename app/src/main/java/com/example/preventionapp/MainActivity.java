@@ -1,11 +1,12 @@
 package com.example.preventionapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.preventationapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,14 +14,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_preventioninfo);
+/*
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
             startSignUpActivity();
-
         }
-        findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
-
+        findViewById(R.id.loginButton).setOnClickListener(onClickListener);
+*/
     }
 
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch(v.getId()){
-                case R.id.logoutButton:
+                case R.id.loginButton:
                     FirebaseAuth.getInstance().signOut();
                     startSignUpActivity();
                     break;

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".DropdownTest">
+<!--툴바-->
+    <LinearLayout
+        android:id="@+id/activity_prevention_LinLay_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="#4791c9"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/activity_prevention_btn_menu"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#000000" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:src="@drawable/preventionImage" />
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+        android:id="@+id/activity_preventioninfo_LV_list" />
+
+</LinearLayout>
