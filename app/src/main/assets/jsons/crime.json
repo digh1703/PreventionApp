@@ -1,0 +1,1452 @@
+[
+ {
+   "id": "서울 중부",
+   "latitude": 37.563832,
+   "longtitude": "126.9896",
+   "murder": 1,
+   "robbery": 5,
+   "rape": 132,
+   "larceny": 1057,
+   "violence": 1176
+ },
+ {
+   "id": "서울 종로",
+   "latitude": 37.575762,
+   "longtitude": "126.984857",
+   "murder": 5,
+   "robbery": 1,
+   "rape": 136,
+   "larceny": 774,
+   "violence": 1131
+ },
+ {
+   "id": "서울 남대문",
+   "latitude": 37.554997,
+   "longtitude": "126.973477",
+   "murder": 1,
+   "robbery": 16,
+   "rape": 75,
+   "larceny": 798,
+   "violence": 779
+ },
+ {
+   "id": "서울 서대문 ",
+   "latitude": 37.564781,
+   "longtitude": "126.966779",
+   "murder": 5,
+   "robbery": 3,
+   "rape": 206,
+   "larceny": 1062,
+   "violence": 1526
+ },
+ {
+   "id": "서울 혜화",
+   "latitude": 37.57184,
+   "longtitude": "126.998853",
+   "murder": 1,
+   "robbery": 2,
+   "rape": 100,
+   "larceny": 739,
+   "violence": 831
+ },
+ {
+   "id": "서울 용산",
+   "latitude": 37.523051,
+   "longtitude": "126.961143",
+   "murder": 1,
+   "robbery": 3,
+   "rape": 331,
+   "larceny": 1096,
+   "violence": 1980
+ },
+ {
+   "id": "서울 성북",
+   "latitude": 37.589732,
+   "longtitude": "127.01613",
+   "murder": 1,
+   "robbery": 0,
+   "rape": 125,
+   "larceny": 600,
+   "violence": 886
+ },
+ {
+   "id": "서울 동대문",
+   "latitude": 37.58506,
+   "longtitude": "127.045758",
+   "murder": 2,
+   "robbery": 5,
+   "rape": 145,
+   "larceny": 1447,
+   "violence": 2081
+ },
+ {
+   "id": "서울 마포",
+   "latitude": 37.55078,
+   "longtitude": "126.953972",
+   "murder": 6,
+   "robbery": 6,
+   "rape": 473,
+   "larceny": 2011,
+   "violence": 2676
+ },
+ {
+   "id": "서울 영등포",
+   "latitude": 37.517994,
+   "longtitude": "126.907512",
+   "murder": 17,
+   "robbery": 8,
+   "rape": 391,
+   "larceny": 2292,
+   "violence": 3132
+ },
+ {
+   "id": "서울 성동",
+   "latitude": 37.561733,
+   "longtitude": "127.036375",
+   "murder": 2,
+   "robbery": 5,
+   "rape": 126,
+   "larceny": 999,
+   "violence": 1325
+ },
+ {
+   "id": "서울 동작",
+   "latitude": 37.513839,
+   "longtitude": "126.953904",
+   "murder": 3,
+   "robbery": 7,
+   "rape": 288,
+   "larceny": 1151,
+   "violence": 1651
+ },
+ {
+   "id": "서울 광진",
+   "latitude": 37.542889,
+   "longtitude": "127.08382",
+   "murder": 7,
+   "robbery": 2,
+   "rape": 229,
+   "larceny": 1769,
+   "violence": 1908
+ },
+ {
+   "id": "서울 서부",
+   "latitude": 37.612874,
+   "longtitude": "126.927495",
+   "murder": 4,
+   "robbery": 0,
+   "rape": 58,
+   "larceny": 505,
+   "violence": 807
+ },
+ {
+   "id": "서울 강북",
+   "latitude": 37.63736,
+   "longtitude": "127.027344",
+   "murder": 8,
+   "robbery": 7,
+   "rape": 188,
+   "larceny": 1112,
+   "violence": 2122
+ },
+ {
+   "id": "서울 금천",
+   "latitude": 37.456911,
+   "longtitude": "126.897044",
+   "murder": 6,
+   "robbery": 7,
+   "rape": 200,
+   "larceny": 185,
+   "violence": 1168
+ },
+ {
+   "id": "서울 중랑",
+   "latitude": 37.618614,
+   "longtitude": "127.104588",
+   "murder": 4,
+   "robbery": 3,
+   "rape": 174,
+   "larceny": 1526,
+   "violence": 2581
+ },
+ {
+   "id": "서울 강남",
+   "latitude": 37.509482,
+   "longtitude": "127.066955",
+   "murder": 5,
+   "robbery": 9,
+   "rape": 406,
+   "larceny": 2020,
+   "violence": 2188
+ },
+ {
+   "id": "서울 관악",
+   "latitude": 37.474391,
+   "longtitude": "126.950974",
+   "murder": 9,
+   "robbery": 10,
+   "rape": 352,
+   "larceny": 2012,
+   "violence": 2643
+ },
+ {
+   "id": "서울 강서",
+   "latitude": 37.539795,
+   "longtitude": "126.829997",
+   "murder": 11,
+   "robbery": 6,
+   "rape": 269,
+   "larceny": 1724,
+   "violence": 2619
+ },
+ {
+   "id": "서울 강동",
+   "latitude": 37.528525,
+   "longtitude": "127.126824",
+   "murder": 3,
+   "robbery": 7,
+   "rape": 170,
+   "larceny": 1515,
+   "violence": 2224
+ },
+ {
+   "id": "서울 종암",
+   "latitude": 37.602055,
+   "longtitude": "127.032147",
+   "murder": 6,
+   "robbery": 1,
+   "rape": 58,
+   "larceny": 564,
+   "violence": 801
+ },
+ {
+   "id": "서울 구로",
+   "latitude": 37.494969,
+   "longtitude": "126.886726",
+   "murder": 8,
+   "robbery": 9,
+   "rape": 250,
+   "larceny": 1717,
+   "violence": 2826
+ },
+ {
+   "id": "서울 서초",
+   "latitude": 37.495603,
+   "longtitude": "127.00527",
+   "murder": 5,
+   "robbery": 4,
+   "rape": 407,
+   "larceny": 1482,
+   "violence": 1908
+ },
+ {
+   "id": "서울 양천",
+   "latitude": 37.516561,
+   "longtitude": "?126.865673",
+   "murder": 2,
+   "robbery": 4,
+   "rape": 120,
+   "larceny": 1384,
+   "violence": 2005
+ },
+ {
+   "id": "서울 송파",
+   "latitude": 37.501903,
+   "longtitude": "127.127158",
+   "murder": 5,
+   "robbery": 6,
+   "rape": 309,
+   "larceny": 2352,
+   "violence": 3135
+ },
+ {
+   "id": "서울 노원",
+   "latitude": 37.642536,
+   "longtitude": "127.071709",
+   "murder": 5,
+   "robbery": 5,
+   "rape": 194,
+   "larceny": 1422,
+   "violence": 2381
+ },
+ {
+   "id": "서울 방배",
+   "latitude": 37.494611,
+   "longtitude": "126.98313",
+   "murder": 0,
+   "robbery": 1,
+   "rape": 63,
+   "larceny": 369,
+   "violence": 487
+ },
+ {
+   "id": "서울 은평",
+   "latitude": 37.628375,
+   "longtitude": "?126.928723",
+   "murder": 4,
+   "robbery": 1,
+   "rape": 130,
+   "larceny": 773,
+   "violence": 1308
+ },
+ {
+   "id": "서울 도봉",
+   "latitude": 37.653361,
+   "longtitude": "127.052682",
+   "murder": 1,
+   "robbery": 5,
+   "rape": 113,
+   "larceny": 781,
+   "violence": 1349
+ },
+ {
+   "id": "서울 수서",
+   "latitude": 37.493487,
+   "longtitude": "127.077214",
+   "murder": 5,
+   "robbery": 5,
+   "rape": 194,
+   "larceny": 984,
+   "violence": 1697
+ },
+ {
+   "id": "부산 중부",
+   "latitude": 35.107206,
+   "longtitude": "129.035807",
+   "murder": 1,
+   "robbery": 2,
+   "rape": 47,
+   "larceny": 954,
+   "violence": 784
+ },
+ {
+   "id": "부산 동래",
+   "latitude": 35.20046,
+   "longtitude": "129.084727",
+   "murder": 3,
+   "robbery": 6,
+   "rape": 89,
+   "larceny": 1078,
+   "violence": 1375
+ },
+ {
+   "id": "부산 영도",
+   "latitude": 35.093818,
+   "longtitude": "129.036679",
+   "murder": 4,
+   "robbery": 2,
+   "rape": 43,
+   "larceny": 329,
+   "violence": 666
+ },
+ {
+   "id": "부산 동부",
+   "latitude": 35.130043,
+   "longtitude": "129.049256",
+   "murder": 0,
+   "robbery": 5,
+   "rape": 63,
+   "larceny": 576,
+   "violence": 823
+ },
+ {
+   "id": "부산 부산진",
+   "latitude": 35.160296,
+   "longtitude": "129.054362",
+   "murder": 1,
+   "robbery": 17,
+   "rape": 321,
+   "larceny": 2376,
+   "violence": 3253
+ },
+ {
+   "id": "부산 서부",
+   "latitude": 35.109915,
+   "longtitude": "129.013456",
+   "murder": 3,
+   "robbery": 8,
+   "rape": 32,
+   "larceny": 730,
+   "violence": 282
+ },
+ {
+   "id": "부산 남부",
+   "latitude": 35.15306,
+   "longtitude": "129.08975",
+   "murder": 8,
+   "robbery": 10,
+   "rape": 185,
+   "larceny": 1376,
+   "violence": 1986
+ },
+ {
+   "id": "부산 해운대",
+   "latitude": 35.185896,
+   "longtitude": "129.121671",
+   "murder": 3,
+   "robbery": 3,
+   "rape": 185,
+   "larceny": 1376,
+   "violence": 1986
+ },
+ {
+   "id": "부산 사상",
+   "latitude": 35.154384,
+   "longtitude": "128.991338",
+   "murder": 5,
+   "robbery": 9,
+   "rape": 116,
+   "larceny": 1018,
+   "violence": 1312
+ },
+ {
+   "id": "부산 금정",
+   "latitude": 35.24712,
+   "longtitude": "129.091918",
+   "murder": 4,
+   "robbery": 7,
+   "rape": 87,
+   "larceny": 595,
+   "violence": 936
+ },
+ {
+   "id": "부산 사하",
+   "latitude": 35.086422,
+   "longtitude": "128.978258",
+   "murder": 4,
+   "robbery": 8,
+   "rape": 119,
+   "larceny": 1062,
+   "violence": 1705
+ },
+ {
+   "id": "부산 연제",
+   "latitude": 35.182904,
+   "longtitude": "129.104578",
+   "murder": 5,
+   "robbery": 8,
+   "rape": 90,
+   "larceny": 998,
+   "violence": 1578
+ },
+ {
+   "id": "부산 강서",
+   "latitude": 35.116467,
+   "longtitude": "128.906523",
+   "murder": 2,
+   "robbery": 1,
+   "rape": 46,
+   "larceny": 501,
+   "violence": 499
+ },
+ {
+   "id": "부산 북부",
+   "latitude": 35.23016,
+   "longtitude": "129.009364",
+   "murder": 7,
+   "robbery": 3,
+   "rape": 72,
+   "larceny": 805,
+   "violence": 1441
+ },
+ {
+   "id": "부산 기장",
+   "latitude": 35.256601,
+   "longtitude": "129.225013",
+   "murder": 3,
+   "robbery": 2,
+   "rape": 38,
+   "larceny": 415,
+   "violence": 772
+ },
+ {
+   "id": "대구",
+   "latitude": 35.829555,
+   "longtitude": "128.633611",
+   "murder": 30,
+   "robbery": 44,
+   "rape": 246,
+   "larceny": 8169,
+   "violence": 6821
+ },
+ {
+   "id": "인천 중부",
+   "latitude": 37.472775,
+   "longtitude": "126.61795",
+   "murder": 3,
+   "robbery": 4,
+   "rape": 144,
+   "larceny": 784,
+   "violence": 1601
+ },
+ {
+   "id": "인천 미추홀",
+   "latitude": 37.44274,
+   "longtitude": "126.653366",
+   "murder": 6,
+   "robbery": 8,
+   "rape": 271,
+   "larceny": 1520,
+   "violence": 3196
+ },
+ {
+   "id": "인천 남동",
+   "latitude": 37.442081,
+   "longtitude": "126.707328",
+   "murder": 4,
+   "robbery": 0,
+   "rape": 225,
+   "larceny": 1065,
+   "violence": 2509
+ },
+ {
+   "id": "인천 부평",
+   "latitude": 37.507794,
+   "longtitude": "126.719345",
+   "murder": 5,
+   "robbery": 6,
+   "rape": 164,
+   "larceny": 1059,
+   "violence": 1870
+ },
+ {
+   "id": "인천 서부",
+   "latitude": 37.54436,
+   "longtitude": "126.678267",
+   "murder": 9,
+   "robbery": 6,
+   "rape": 241,
+   "larceny": 1377,
+   "violence": 3055
+ },
+ {
+   "id": "인천 계양",
+   "latitude": 37.537697,
+   "longtitude": "126.735226",
+   "murder": 3,
+   "robbery": 3,
+   "rape": 131,
+   "larceny": 754,
+   "violence": 1900
+ },
+ {
+   "id": "인천 강화",
+   "latitude": 37.74785,
+   "longtitude": "126.48648",
+   "murder": 1,
+   "robbery": 0,
+   "rape": 18,
+   "larceny": 133,
+   "violence": 403
+ },
+ {
+   "id": "인천 연수",
+   "latitude": 37.410459,
+   "longtitude": "126.680888",
+   "murder": 2,
+   "robbery": 2,
+   "rape": 95,
+   "larceny": 841,
+   "violence": 1383
+ },
+ {
+   "id": "인천 삼산",
+   "latitude": 37.511174,
+   "longtitude": "126.732124",
+   "murder": 6,
+   "robbery": 6,
+   "rape": 200,
+   "larceny": 1361,
+   "violence": 2307
+ },
+ {
+   "id": "인천 논현",
+   "latitude": 37.393588,
+   "longtitude": "126.723652",
+   "murder": 5,
+   "robbery": 1,
+   "rape": 99,
+   "larceny": 576,
+   "violence": 1085
+ },
+ {
+   "id": "광주 동부",
+   "latitude": 35.149254,
+   "longtitude": "126.919873",
+   "murder": 0,
+   "robbery": 2,
+   "rape": 76,
+   "larceny": 601,
+   "violence": 979
+ },
+ {
+   "id": "광주 서부",
+   "latitude": 35.150839,
+   "longtitude": "126.842074",
+   "murder": 4,
+   "robbery": 3,
+   "rape": 214,
+   "larceny": 1163,
+   "violence": 2251
+ },
+ {
+   "id": "광주남부",
+   "latitude": 35.12283,
+   "longtitude": "126.920627",
+   "murder": 3,
+   "robbery": 1,
+   "rape": 68,
+   "larceny": 606,
+   "violence": 916
+ },
+ {
+   "id": "광주 북부",
+   "latitude": 35.187073,
+   "longtitude": "126.899098",
+   "murder": 6,
+   "robbery": 12,
+   "rape": 217,
+   "larceny": 1416,
+   "violence": 2131
+ },
+ {
+   "id": "광주 광산",
+   "latitude": 35.15278,
+   "longtitude": "126.782769",
+   "murder": 3,
+   "robbery": 1,
+   "rape": 68,
+   "larceny": 606,
+   "violence": 916
+ },
+ {
+   "id": "대전 중구",
+   "latitude": 36.326719,
+   "longtitude": "127.422596",
+   "murder": 6,
+   "robbery": 15,
+   "rape": 135,
+   "larceny": 1026,
+   "violence": 2085
+ },
+ {
+   "id": "대전 동구",
+   "latitude": 36.321877,
+   "longtitude": "127.440825",
+   "murder": 0,
+   "robbery": 10,
+   "rape": 135,
+   "larceny": 999,
+   "violence": 1568
+ },
+ {
+   "id": "대전 서구",
+   "latitude": 36.308807,
+   "longtitude": "127.372988",
+   "murder": 5,
+   "robbery": 14,
+   "rape": 273,
+   "larceny": 1757,
+   "violence": 2946
+ },
+ {
+   "id": "대전 대덕구",
+   "latitude": 36.371806,
+   "longtitude": "127.429339",
+   "murder": 1,
+   "robbery": 6,
+   "rape": 65,
+   "larceny": 652,
+   "violence": 1107
+ },
+ {
+   "id": "대전 유성구",
+   "latitude": 36.378757,
+   "longtitude": "127.325355",
+   "murder": 3,
+   "robbery": 6,
+   "rape": 127,
+   "larceny": 1107,
+   "violence": 1496
+ },
+ {
+   "id": "울산",
+   "latitude": 35.573889,
+   "longtitude": "129.309889",
+   "murder": 11,
+   "robbery": 26,
+   "rape": 420,
+   "larceny": 3349,
+   "violence": 3757
+ },
+ {
+   "id": "세종",
+   "latitude": 36.58818,
+   "longtitude": "127.294906",
+   "murder": 5,
+   "robbery": 5,
+   "rape": 90,
+   "larceny": 588,
+   "violence": 301
+ },
+ {
+   "id": "경기 고양",
+   "latitude": 37.628657,
+   "longtitude": "126.829778",
+   "murder": 13,
+   "robbery": 7,
+   "rape": 351,
+   "larceny": 2262,
+   "violence": 5024
+ },
+ {
+   "id": "경기 과천",
+   "latitude": 37.429538,
+   "longtitude": "126.989972",
+   "murder": 0,
+   "robbery": 1,
+   "rape": 19,
+   "larceny": 175,
+   "violence": 211
+ },
+ {
+   "id": "경기 광명",
+   "latitude": 37.474068,
+   "longtitude": "126.867768",
+   "murder": 2,
+   "robbery": 7,
+   "rape": 129,
+   "larceny": 1027,
+   "violence": 1626
+ },
+ {
+   "id": "경기 광주",
+   "latitude": 37.408271,
+   "longtitude": "127.239566",
+   "murder": 6,
+   "robbery": 3,
+   "rape": 83,
+   "larceny": 812,
+   "violence": 1866
+ },
+ {
+   "id": "경기 구리",
+   "latitude": 37.587158,
+   "longtitude": "127.129066",
+   "murder": 4,
+   "robbery": 5,
+   "rape": 99,
+   "larceny": 833,
+   "violence": 1551
+ },
+ {
+   "id": "경기 군포",
+   "latitude": 37.360496,
+   "longtitude": "126.936109",
+   "murder": 3,
+   "robbery": 0,
+   "rape": 83,
+   "larceny": 658,
+   "violence": 1199
+ },
+ {
+   "id": "경기 김포",
+   "latitude": 37.637438,
+   "longtitude": "126.68123",
+   "murder": 2,
+   "robbery": 4,
+   "rape": 110,
+   "larceny": 1010,
+   "violence": 1939
+ },
+ {
+   "id": "경기 남양주",
+   "latitude": 37.61176,
+   "longtitude": "127.17156",
+   "murder": 7,
+   "robbery": 3,
+   "rape": 210,
+   "larceny": 1274,
+   "violence": 2982
+ },
+ {
+   "id": "경기 동두천",
+   "latitude": 37.910443,
+   "longtitude": "127.046113",
+   "murder": 2,
+   "robbery": 2,
+   "rape": 48,
+   "larceny": 329,
+   "violence": 674
+ },
+ {
+   "id": "경기 부천",
+   "latitude": 37.49173,
+   "longtitude": "126.753412",
+   "murder": 12,
+   "robbery": 20,
+   "rape": 397,
+   "larceny": 3715,
+   "violence": 5136
+ },
+ {
+   "id": "경기 성남",
+   "latitude": 37.365311,
+   "longtitude": "127.105465",
+   "murder": 17,
+   "robbery": 16,
+   "rape": 443,
+   "larceny": 3126,
+   "violence": 5227
+ },
+ {
+   "id": "경기 수원",
+   "latitude": 37.297959,
+   "longtitude": "126.996389",
+   "murder": 16,
+   "robbery": 20,
+   "rape": 555,
+   "larceny": 5381,
+   "violence": 8071
+ },
+ {
+   "id": "경기 시흥",
+   "latitude": 37.376772,
+   "longtitude": "126.788079",
+   "murder": 9,
+   "robbery": 10,
+   "rape": 219,
+   "larceny": 1714,
+   "violence": 2848
+ },
+ {
+   "id": "경기 안산",
+   "latitude": 37.29929,
+   "longtitude": "126.844993",
+   "murder": 8,
+   "robbery": 10,
+   "rape": 382,
+   "larceny": 3025,
+   "violence": 4791
+ },
+ {
+   "id": "경기 안성",
+   "latitude": 37.000388,
+   "longtitude": "127.248348",
+   "murder": 3,
+   "robbery": 3,
+   "rape": 71,
+   "larceny": 620,
+   "violence": 1129
+ },
+ {
+   "id": "경기 안양",
+   "latitude": 37.387339,
+   "longtitude": "126.926083",
+   "murder": 2,
+   "robbery": 3,
+   "rape": 253,
+   "larceny": 1662,
+   "violence": 3245
+ },
+ {
+   "id": "경기 양주",
+   "latitude": 37.841048,
+   "longtitude": "127.054243",
+   "murder": 3,
+   "robbery": 0,
+   "rape": 70,
+   "larceny": 475,
+   "violence": 1327
+ },
+ {
+   "id": "경기 여주",
+   "latitude": 37.293418,
+   "longtitude": "127.635619",
+   "murder": 5,
+   "robbery": 0,
+   "rape": 55,
+   "larceny": 313,
+   "violence": 641
+ },
+ {
+   "id": "경기 오산",
+   "latitude": 37.153836,
+   "longtitude": "127.082163",
+   "murder": 5,
+   "robbery": 9,
+   "rape": 77,
+   "larceny": 870,
+   "violence": 1551
+ },
+ {
+   "id": "경기 용인",
+   "latitude": 37.241328,
+   "longtitude": "127.180769",
+   "murder": 12,
+   "robbery": 1,
+   "rape": 263,
+   "larceny": 2201,
+   "violence": 3341
+ },
+ {
+   "id": "경기 의왕",
+   "latitude": 37.344768,
+   "longtitude": "126.974132",
+   "murder": 2,
+   "robbery": 2,
+   "rape": 36,
+   "larceny": 216,
+   "violence": 500
+ },
+ {
+   "id": "경기 의정부",
+   "latitude": 37.744449,
+   "longtitude": "127.044287",
+   "murder": 9,
+   "robbery": 10,
+   "rape": 213,
+   "larceny": 1723,
+   "violence": 3296
+ },
+ {
+   "id": "경기 이천",
+   "latitude": 37.273582,
+   "longtitude": "127.43477",
+   "murder": 2,
+   "robbery": 0,
+   "rape": 96,
+   "larceny": 781,
+   "violence": 1615
+ },
+ {
+   "id": "경기 파주",
+   "latitude": 37.753623,
+   "longtitude": "126.778378",
+   "murder": 9,
+   "robbery": 5,
+   "rape": 134,
+   "larceny": 1112,
+   "violence": 2104
+ },
+ {
+   "id": "경기 평택",
+   "latitude": 36.994784,
+   "longtitude": "127.091034",
+   "murder": 9,
+   "robbery": 13,
+   "rape": 218,
+   "larceny": 2060,
+   "violence": 4119
+ },
+ {
+   "id": "경기 포천",
+   "latitude": 37.893761,
+   "longtitude": "127.204543",
+   "murder": 4,
+   "robbery": 6,
+   "rape": 66,
+   "larceny": 563,
+   "violence": 987
+ },
+ {
+   "id": "경기 하남",
+   "latitude": 37.523293,
+   "longtitude": "127.224618",
+   "murder": 4,
+   "robbery": 0,
+   "rape": 52,
+   "larceny": 546,
+   "violence": 994
+ },
+ {
+   "id": "경기 화성",
+   "latitude": 37.1912,
+   "longtitude": "126.822909",
+   "murder": 16,
+   "robbery": 5,
+   "rape": 177,
+   "larceny": 1935,
+   "violence": 3459
+ },
+ {
+   "id": "강원 강릉",
+   "latitude": 37.768725,
+   "longtitude": "128.906747",
+   "murder": 2,
+   "robbery": 3,
+   "rape": 125,
+   "larceny": 658,
+   "violence": 1527
+ },
+ {
+   "id": "강원 동해",
+   "latitude": 37.525043,
+   "longtitude": "129.116427",
+   "murder": 1,
+   "robbery": 0,
+   "rape": 44,
+   "larceny": 168,
+   "violence": 609
+ },
+ {
+   "id": "강원 삼척",
+   "latitude": 37.446303,
+   "longtitude": "129.174092",
+   "murder": 2,
+   "robbery": 2,
+   "rape": 17,
+   "larceny": 224,
+   "violence": 538
+ },
+ {
+   "id": "강원 속초",
+   "latitude": 38.196894,
+   "longtitude": "128.568742",
+   "murder": 1,
+   "robbery": 1,
+   "rape": 44,
+   "larceny": 228,
+   "violence": 760
+ },
+ {
+   "id": "강원 원주",
+   "latitude": 37.348311,
+   "longtitude": "127.958158",
+   "murder": 3,
+   "robbery": 2,
+   "rape": 150,
+   "larceny": 1065,
+   "violence": 2167
+ },
+ {
+   "id": "강원 춘천",
+   "latitude": 37.870309,
+   "longtitude": "127.723492",
+   "murder": 3,
+   "robbery": 3,
+   "rape": 93,
+   "larceny": 878,
+   "violence": 1433
+ },
+ {
+   "id": "강원 태백",
+   "latitude": 37.102347,
+   "longtitude": "129.008205",
+   "murder": 2,
+   "robbery": 0,
+   "rape": 17,
+   "larceny": 77,
+   "violence": 266
+ },
+ {
+   "id": "충북 제천",
+   "latitude": 37.13412,
+   "longtitude": "128.198037",
+   "murder": 3,
+   "robbery": 4,
+   "rape": 61,
+   "larceny": 308,
+   "violence": 600
+ },
+ {
+   "id": "충북 청주",
+   "latitude": 36.972028,
+   "longtitude": "127.935646",
+   "murder": 21,
+   "robbery": 15,
+   "rape": 363,
+   "larceny": 3333,
+   "violence": 4935
+ },
+ {
+   "id": "충북 충주",
+   "latitude": 36.97565,
+   "longtitude": "127.935864",
+   "murder": 2,
+   "robbery": 2,
+   "rape": 83,
+   "larceny": 769,
+   "violence": 947
+ },
+ {
+   "id": "충남 계룡",
+   "latitude": 36.282085,
+   "longtitude": "127.242812",
+   "murder": 0,
+   "robbery": 0,
+   "rape": 6,
+   "larceny": 60,
+   "violence": 84
+ },
+ {
+   "id": "충남 공주",
+   "latitude": 36.456348,
+   "longtitude": "127.11057",
+   "murder": 0,
+   "robbery": 1,
+   "rape": 45,
+   "larceny": 371,
+   "violence": 500
+ },
+ {
+   "id": "충남 논산",
+   "latitude": 36.158168,
+   "longtitude": "127.017329",
+   "murder": 5,
+   "robbery": 1,
+   "rape": 48,
+   "larceny": 460,
+   "violence": 584
+ },
+ {
+   "id": "충남 당진",
+   "latitude": 36.8942,
+   "longtitude": "126.640414",
+   "murder": 1,
+   "robbery": 6,
+   "rape": 46,
+   "larceny": 573,
+   "violence": 758
+ },
+ {
+   "id": "충남 보령",
+   "latitude": 36.351521,
+   "longtitude": "126.596841",
+   "murder": 2,
+   "robbery": 1,
+   "rape": 46,
+   "larceny": 278,
+   "violence": 407
+ },
+ {
+   "id": "충남 서산",
+   "latitude": 36.776912,
+   "longtitude": "126.447234",
+   "murder": 1,
+   "robbery": 0,
+   "rape": 54,
+   "larceny": 595,
+   "violence": 1114
+ },
+ {
+   "id": "충남 아산",
+   "latitude": 36.770988,
+   "longtitude": "127.02298",
+   "murder": 9,
+   "robbery": 7,
+   "rape": 138,
+   "larceny": 1164,
+   "violence": 1975
+ },
+ {
+   "id": "충남 천안",
+   "latitude": 36.786855,
+   "longtitude": "127.156114",
+   "murder": 8,
+   "robbery": 19,
+   "rape": 285,
+   "larceny": 3252,
+   "violence": 4022
+ },
+ {
+   "id": "전북 군산",
+   "latitude": 35.981082,
+   "longtitude": "126.728248",
+   "murder": 5,
+   "robbery": 3,
+   "rape": 97,
+   "larceny": 1025,
+   "violence": 1609
+ },
+ {
+   "id": "전북 김제",
+   "latitude": 35.79801,
+   "longtitude": "126.896913",
+   "murder": 0,
+   "robbery": 1,
+   "rape": 32,
+   "larceny": 161,
+   "violence": 412
+ },
+ {
+   "id": "전북 남원",
+   "latitude": 35.414121,
+   "longtitude": "127.372993",
+   "murder": 3,
+   "robbery": 3,
+   "rape": 24,
+   "larceny": 248,
+   "violence": 379
+ },
+ {
+   "id": "전북 익산",
+   "latitude": 35.953809,
+   "longtitude": "126.939906",
+   "murder": 5,
+   "robbery": 6,
+   "rape": 90,
+   "larceny": 979,
+   "violence": 1690
+ },
+ {
+   "id": "전북 전주",
+   "latitude": 35.81565,
+   "longtitude": "127.146555",
+   "murder": 14,
+   "robbery": 11,
+   "rape": 302,
+   "larceny": 2212,
+   "violence": 3037
+ },
+ {
+   "id": "전북 정읍",
+   "latitude": 35.567437,
+   "longtitude": "126.85762",
+   "murder": 3,
+   "robbery": 0,
+   "rape": 28,
+   "larceny": 311,
+   "violence": 502
+ },
+ {
+   "id": "전남 광양",
+   "latitude": 34.963514,
+   "longtitude": "127.601894",
+   "murder": 2,
+   "robbery": 3,
+   "rape": 64,
+   "larceny": 321,
+   "violence": 777
+ },
+ {
+   "id": "전남 나주",
+   "latitude": 35.038578,
+   "longtitude": "126.721069",
+   "murder": 2,
+   "robbery": 1,
+   "rape": 39,
+   "larceny": 305,
+   "violence": 435
+ },
+ {
+   "id": "전남 목포",
+   "latitude": 35.807559,
+   "longtitude": "127.151777",
+   "murder": 4,
+   "robbery": 10,
+   "rape": 139,
+   "larceny": 994,
+   "violence": 1889
+ },
+ {
+   "id": "전남 순천",
+   "latitude": 34.971657,
+   "longtitude": "127.482185",
+   "murder": 4,
+   "robbery": 2,
+   "rape": 122,
+   "larceny": 740,
+   "violence": 1531
+ },
+ {
+   "id": "전남 여수",
+   "latitude": 34.740822,
+   "longtitude": "127.740527",
+   "murder": 9,
+   "robbery": 3,
+   "rape": 107,
+   "larceny": 809,
+   "violence": 2052
+ },
+ {
+   "id": "경북 경산",
+   "latitude": 35.822504,
+   "longtitude": "128.744978",
+   "murder": 3,
+   "robbery": 4,
+   "rape": 105,
+   "larceny": 981,
+   "violence": 1518
+ },
+ {
+   "id": "경북 경주",
+   "latitude": 35.845689,
+   "longtitude": "129.211453",
+   "murder": 4,
+   "robbery": 7,
+   "rape": 76,
+   "larceny": 832,
+   "violence": 1091
+ },
+ {
+   "id": "경북 구미",
+   "latitude": 36.119538,
+   "longtitude": "128.34648",
+   "murder": 6,
+   "robbery": 7,
+   "rape": 135,
+   "larceny": 1360,
+   "violence": 1784
+ },
+ {
+   "id": "경북 김천",
+   "latitude": 36.120364,
+   "longtitude": "128.118617",
+   "murder": 1,
+   "robbery": 4,
+   "rape": 48,
+   "larceny": 366,
+   "violence": 692
+ },
+ {
+   "id": "경북 문경",
+   "latitude": 36.588247,
+   "longtitude": "128.180247",
+   "murder": 2,
+   "robbery": 0,
+   "rape": 21,
+   "larceny": 142,
+   "violence": 335
+ },
+ {
+   "id": "경북 상주",
+   "latitude": 36.415518,
+   "longtitude": "128.163778",
+   "murder": 1,
+   "robbery": 0,
+   "rape": 33,
+   "larceny": 245,
+   "violence": 382
+ },
+ {
+   "id": "경북 안동",
+   "latitude": 36.561682,
+   "longtitude": "128.720191",
+   "murder": 0,
+   "robbery": 1,
+   "rape": 57,
+   "larceny": 408,
+   "violence": 834
+ },
+ {
+   "id": "경북 영주",
+   "latitude": 36.820717,
+   "longtitude": "128.609712",
+   "murder": 1,
+   "robbery": 2,
+   "rape": 27,
+   "larceny": 194,
+   "violence": 431
+ },
+ {
+   "id": "경북 영천",
+   "latitude": 35.952785,
+   "longtitude": "128.906601",
+   "murder": 1,
+   "robbery": 2,
+   "rape": 29,
+   "larceny": 364,
+   "violence": 487
+ },
+ {
+   "id": "경북 포항",
+   "latitude": 36.007306,
+   "longtitude": "129.347191",
+   "murder": 13,
+   "robbery": 6,
+   "rape": 168,
+   "larceny": 1702,
+   "violence": 2589
+ },
+ {
+   "id": "경남 거제",
+   "latitude": 34.898648,
+   "longtitude": "128.686685",
+   "murder": 5,
+   "robbery": 3,
+   "rape": 115,
+   "larceny": 795,
+   "violence": 1164
+ },
+ {
+   "id": "경남 김해",
+   "latitude": 35.226817,
+   "longtitude": "128.879107",
+   "murder": 7,
+   "robbery": 10,
+   "rape": 159,
+   "larceny": 2408,
+   "violence": 3043
+ },
+ {
+   "id": "경남 밀양",
+   "latitude": 35.469114,
+   "longtitude": "128.76085",
+   "murder": 4,
+   "robbery": 2,
+   "rape": 34,
+   "larceny": 246,
+   "violence": 431
+ },
+ {
+   "id": "경남 사천",
+   "latitude": 34.932889,
+   "longtitude": "128.080887",
+   "murder": 2,
+   "robbery": 3,
+   "rape": 30,
+   "larceny": 206,
+   "violence": 605
+ },
+ {
+   "id": "경남 양산",
+   "latitude": 35.338175,
+   "longtitude": "129.016532",
+   "murder": 5,
+   "robbery": 4,
+   "rape": 91,
+   "larceny": 984,
+   "violence": 1324
+ },
+ {
+   "id": "경남 진주",
+   "latitude": 35.193299,
+   "longtitude": "128.081485",
+   "murder": 6,
+   "robbery": 5,
+   "rape": 121,
+   "larceny": 1723,
+   "violence": 1627
+ },
+ {
+   "id": "경남 창원",
+   "latitude": 35.25175,
+   "longtitude": "128.636871",
+   "murder": 22,
+   "robbery": 19,
+   "rape": 303,
+   "larceny": 3377,
+   "violence": 5428
+ },
+ {
+   "id": "경남 통영",
+   "latitude": 34.882619,
+   "longtitude": "128.418966",
+   "murder": 3,
+   "robbery": 3,
+   "rape": 39,
+   "larceny": 412,
+   "violence": 905
+ },
+ {
+   "id": "제주 제주",
+   "latitude": 33.489266,
+   "longtitude": "126.499245",
+   "murder": 11,
+   "robbery": 9,
+   "rape": 285,
+   "larceny": 2124,
+   "violence": 3924
+ }
+]
