@@ -1,113 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
-    //액션바 or 자체구현
-    <LinearLayout
-        android:id="@+id/activity_main_LinLay_toolBar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:background="#4791c9"
-        android:orientation="horizontal">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        />
 
-        <Button
-            android:id="@+id/activity_main_btn_menu"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="#000000" />
-    </LinearLayout>
-    <View
-        android:id="@+id/activity_main_view_titleImage"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:background="#7dc1fc"/>
-    
-    <TableLayout
-        android:id="@+id/activity_main_TableLay_btnMenu"
-        android:layout_width="280dp"
-        android:layout_height="152dp"
-        android:layout_marginTop="-30dp"
-        android:layout_gravity="center"
-        android:background="#ffffff"
-        android:elevation="10dp"
-        android:stretchColumns="0, 1, 2"
-        >
-        <TableRow>
-            <View
-                android:layout_width="80dp"
-                android:layout_height="76dp"
-                android:background="#919191"/>
-            <View
-                android:layout_width="80dp"
-                android:layout_height="76dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:background="#6A5B5B"
-                />
-            <View
-                android:layout_width="80dp"
-                android:layout_height="76dp"
-                android:background="#919191"/>
-        </TableRow>
-        <TableRow>
-            <View
-                android:layout_width="80dp"
-                android:layout_height="76dp"
-                android:background="#6A5B5B"/>
-
-            <View
-                android:layout_width="80dp"
-                android:layout_height="76dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:background="#919191"
-                />
-
-            <View
-                android:layout_width="80dp"
-                android:layout_height="76dp"
-                android:background="#6A5B5B"/>
-        </TableRow>
-    </TableLayout>
-
-    <LinearLayout
-        android:id="@+id/activity_main_LV_board"
-        android:layout_width="310dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
-        android:orientation="vertical">
-
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.example.preventionapp.MainFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <LinearLayout
+            android:id="@+id/fragment2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="게시판"
-                android:layout_marginLeft="5dp"/>
-            <Button
-                android:id="@+id/activity_main_btn_moreInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text=">더보기"
-                android:layout_marginLeft="200dp"
-                android:background="#ffffff"
-                />
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"/>
+    </FrameLayout>
 
-        <ListView
-            android:id="@+id/activity_main_LV_boardContents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="#d1d1d1" />
-    </LinearLayout>
+
+
 </LinearLayout>

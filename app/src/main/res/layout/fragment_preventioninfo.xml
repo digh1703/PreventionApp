@@ -5,17 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".DropdownTest">
+    tools:context=".InfoFragment">
 <!--툴바-->
     <LinearLayout
-        android:id="@+id/activity_prevention_LinLay_toolbar"
+        android:id="@+id/fragment_prevention_LinLay_toolbar"
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="#4791c9"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/activity_prevention_btn_menu"
+            android:id="@+id/fragment_prevention_btn_menu"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="10dp"
@@ -32,7 +32,9 @@
     <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-        android:id="@+id/activity_preventioninfo_LV_list" />
+        android:id="@+id/fragment_preventioninfo_LV_list"
+        />
 
 </LinearLayout>

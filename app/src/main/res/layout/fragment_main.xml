@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFragment"
+    android:orientation="vertical"
+    >
+
+    <View
+        android:id="@+id/activity_main_view_titleImage"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="#7dc1fc" />
+
+    <TableLayout
+        android:id="@+id/activity_main_TableLay_btnMenu"
+        android:layout_width="280dp"
+        android:layout_height="152dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="-30dp"
+        android:background="#ffffff"
+        android:elevation="10dp"
+        android:stretchColumns="0, 1, 2">
+
+        <TableRow>
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="76dp"
+                android:background="#919191" />
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="76dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:background="#6A5B5B" />
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="76dp"
+                android:background="#919191" />
+        </TableRow>
+
+        <TableRow>
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="76dp"
+                android:background="#6A5B5B" />
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="76dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:background="#919191" />
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="76dp"
+                android:background="#6A5B5B" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_main_LV_board"
+        android:layout_width="310dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:text="게시판" />
+
+            <Button
+                android:id="@+id/activity_main_btn_moreInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="200dp"
+                android:text=">더보기" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/activity_main_LV_boardContents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="#d1d1d1" />
+    </LinearLayout>
+
+
+</LinearLayout>
