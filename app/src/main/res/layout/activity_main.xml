@@ -11,20 +11,16 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         />
-
+    <LinearLayout
+        android:id="@+id/fragment2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <fragment
-            android:id="@+id/fragment"
-            android:name="com.example.preventionapp.MainFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <LinearLayout
-            android:id="@+id/fragment2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"/>
+
+
     </FrameLayout>
 
 

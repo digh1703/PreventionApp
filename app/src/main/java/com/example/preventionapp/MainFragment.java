@@ -37,7 +37,7 @@ public class MainFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getView().getContext(), "asdasd", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getView().getContext(), "더 보기 버튼", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/search"
+        android:id="@+id/board_toolbar_search"
         android:title="search"
         app:showAsAction="always"
         android:icon="@drawable/toolbar_search"/>
 
     <item
-        android:id="@+id/option"
-        android:title="option"/>
+        android:id="@+id/board_toolbar_option"
+        android:title="option2"/>
 
 </menu>

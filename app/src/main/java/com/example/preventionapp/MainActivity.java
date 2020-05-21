@@ -2,6 +2,8 @@ package com.example.preventionapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,14 +28,15 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawer;
     NavigationView navigationView;
 
-
-
-    //외부 선언 필요 , 다른 메서드에서도 사용
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment2, new MainFragment());
+        fragmentTransaction.commit();
 
         toolbar = (androidx.appcompat.widget.Toolbar)findViewById(R.id.toolbar);
         setTitle("");
@@ -62,18 +66,21 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                switch (menuItem.getItemId())
-                {
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_0:
+                        fragmentTransaction.replace(R.id.fragment2, new MainFragment());
+                        fragmentTransaction.commit();
+                        return true;
                     case R.id.nav_1:
                         Toast.makeText(getApplicationContext(), "SelectedItem 1", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.nav_2:
-                        Toast.makeText(getApplicationContext(), "SelectedItem 2", Toast.LENGTH_SHORT).show();
+                        fragmentTransaction.replace(R.id.fragment2, new CallFragment());
+                        fragmentTransaction.commit();
                         return true;
                     case R.id.nav_3:
                         Toast.makeText(getApplicationContext(), "SelectedItem 3", Toast.LENGTH_SHORT).show();
@@ -100,29 +107,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-/*
+    //activity_main id.main_toolbar 에 menu , main_toolbar.xml을 더하는 과정
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main, menu);
+        inflater.inflate(R.menu.main_toolbar, menu);
         //xml activity_main 가 menu 객체로 변환
-
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.toolbar_menu:
-                drawer.openDrawer(Gravity.LEFT);
+            case R.id.board_toolbar_search:
+                Toast.makeText(getApplicationContext(), "search", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.board_toolbar_option:
+                Toast.makeText(getApplicationContext(), "option", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-*/
+
     View.OnClickListener onClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {

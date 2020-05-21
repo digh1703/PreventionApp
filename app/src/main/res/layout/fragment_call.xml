@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+    <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/fragment_call_call"
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:drawableLeft="@mipmap/call"
+            android:linksClickable="false"
+            android:background="@color/colorPrimary"
+            android:text="통화 신고"
+            android:textColor="#ffffff"
+            android:textSize="20dp"></Button>
+
+        <Button
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:drawableLeft="@mipmap/message_icon"
+            android:background="#ffffff"
+            android:text="문자 신고"
+            android:textSize="20dp"
+            android:linksClickable="false">
+        </Button>
+        <Button
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:drawableLeft="@mipmap/call"
+            android:background="#ffffff"
+            android:text="긴급 신고 설정"
+            android:textSize="20dp"
+            android:linksClickable="false">
+        </Button>
+
+    </LinearLayout>
+
+</LinearLayout>

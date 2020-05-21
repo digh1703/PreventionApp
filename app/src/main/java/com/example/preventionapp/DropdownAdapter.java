@@ -34,7 +34,7 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
         if(convertView == null){
             convertView = myinf.inflate(this.groupLayout, parent, false);
         }
-        TextView groupName = (TextView)convertView.findViewById(R.id.activity_preventionInfo_groupRow);
+        TextView groupName = (TextView)convertView.findViewById(R.id.fragment_preventionInfo_groupRow);
         groupName.setText(DataList.get(groupPosition).groupName);
         return convertView;
     }
@@ -45,7 +45,7 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
         if(convertView == null){
             convertView = myinf.inflate(this.chlidLayout, parent, false);
         }
-        TextView childName = (TextView)convertView.findViewById(R.id.activity_preventionInfo_groupChildRow);
+        TextView childName = (TextView)convertView.findViewById(R.id.fragment_preventionInfo_groupChildRow);
         childName.setText(DataList.get(groupPosition).child.get(childPosition));
         return convertView;
     }
