@@ -12,16 +12,11 @@
         android:background="@color/colorPrimary"
         />
     <LinearLayout
-        android:id="@+id/fragment2"
+        android:id="@+id/activity_main_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"/>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-
-    </FrameLayout>
 
 
 

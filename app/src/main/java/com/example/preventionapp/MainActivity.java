@@ -2,6 +2,7 @@ package com.example.preventionapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment2, new MainFragment());
+        fragmentTransaction.replace(R.id.activity_main_fragment, new MainFragment());
         fragmentTransaction.commit();
 
         toolbar = (androidx.appcompat.widget.Toolbar)findViewById(R.id.toolbar);
@@ -72,25 +73,29 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 switch (menuItem.getItemId()) {
                     case R.id.nav_0:
-                        fragmentTransaction.replace(R.id.fragment2, new MainFragment());
+                        fragmentTransaction.replace(R.id.activity_main_fragment, new MainFragment());
                         fragmentTransaction.commit();
+                        drawer.closeDrawer(Gravity.LEFT);
                         return true;
                     case R.id.nav_1:
                         Toast.makeText(getApplicationContext(), "SelectedItem 1", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.nav_2:
-                        fragmentTransaction.replace(R.id.fragment2, new CallFragment());
+                        fragmentTransaction.replace(R.id.activity_main_fragment, new CallFragment());
+                        drawer.closeDrawer(Gravity.LEFT);
                         fragmentTransaction.commit();
                         return true;
                     case R.id.nav_3:
                         Toast.makeText(getApplicationContext(), "SelectedItem 3", Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.nav_4:
-                        fragmentTransaction.replace(R.id.fragment2, new InfoFragment());
+                        fragmentTransaction.replace(R.id.activity_main_fragment, new InfoFragment());
+                        drawer.closeDrawer(Gravity.LEFT);
                         fragmentTransaction.commit();
                         return true;
                     case R.id.nav_5:
-                        fragmentTransaction.replace(R.id.fragment2, new BoardFragment());
+                        fragmentTransaction.replace(R.id.activity_main_fragment, new BoardFragment());
+                        drawer.closeDrawer(Gravity.LEFT);
                         fragmentTransaction.commit();
                         return true;
                     case R.id.nav_6:
@@ -123,7 +128,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "search", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.board_toolbar_option:
-                Toast.makeText(getApplicationContext(), "option", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),BoardContentsWriteActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

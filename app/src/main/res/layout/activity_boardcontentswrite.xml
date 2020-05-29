@@ -8,7 +8,7 @@
     android:background="#ffffff">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/activity_board_insert_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -16,7 +16,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:paddingTop="25dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
@@ -24,17 +24,24 @@
         android:id="@+id/test">
 
         <EditText
+            android:id="@+id/activity_boardContentsWrite_Edit_title"
             android:layout_width="340dp"
             android:layout_height="40dp"
             android:hint="제목" />
 
         <EditText
+            android:id="@+id/activity_boardContentsWrite_Edit_contents"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@null"
             android:hint="글 작성란" />
     </LinearLayout>
-
+    <Button
+        android:id="@+id/activity_boardContentsWrite_btn_write"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:text="입력 완료"/>
 
 </LinearLayout>
