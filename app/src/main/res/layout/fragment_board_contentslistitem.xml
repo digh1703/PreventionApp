@@ -42,35 +42,35 @@
             android:text="아이디"
             android:textSize="10dp"/>
         <View
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginLeft="155dp"
-            android:layout_marginRight="5dp"
-            android:background="@color/colorPrimary"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="140dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/recommend_icon"
             />
         <TextView
             android:id="@+id/fragment_board_contentsListItem_recommendNum"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginRight="5dp"
-            android:textSize="8dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="3dp"
+            android:textSize="12dp"
             android:textAlignment="center"
-            android:text="추천"
+            android:text="0"
             />
         <View
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginRight="5dp"
-            android:background="@color/colorPrimary"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/comment_icon"
             />
         <TextView
             android:id="@+id/fragment_board_contentsListItem_replyNum"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginRight="12dp"
-            android:textSize="8dp"
+            android:textSize="12dp"
             android:textAlignment="center"
-            android:text="댓글수"
+            android:text="0"
             />
 
     </LinearLayout>

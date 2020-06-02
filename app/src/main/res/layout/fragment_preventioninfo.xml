@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context=".InfoFragment">
 <!--툴바-->
 
@@ -15,11 +16,11 @@
         android:src="@drawable/preventionimage" />
 
     <ExpandableListView
+        android:id="@+id/fragment_preventioninfo_LV_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-        android:id="@+id/fragment_preventioninfo_LV_list"
         />
 
 </LinearLayout>

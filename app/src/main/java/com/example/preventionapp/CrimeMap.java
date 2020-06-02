@@ -57,7 +57,7 @@ public class CrimeMap extends AppCompatActivity implements OnMapReadyCallback,Na
         getjson();
 
 
-        }
+    }
 
     private void getjson(){
 

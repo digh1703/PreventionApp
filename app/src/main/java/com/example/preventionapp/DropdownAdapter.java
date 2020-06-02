@@ -1,10 +1,12 @@
 package com.example.preventionapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -35,6 +37,22 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
             convertView = myinf.inflate(this.groupLayout, parent, false);
         }
         TextView groupName = (TextView)convertView.findViewById(R.id.fragment_preventionInfo_groupRow);
+        ImageView imageview = convertView.findViewById(R.id.groupRow_image);
+
+        switch (DataList.get(groupPosition).groupName){
+            case "강도":
+                imageview.setImageResource(R.drawable.thief);
+                break;
+            case "절도":
+                imageview.setImageResource(R.drawable.people);
+                break;
+            case "성폭력":
+                imageview.setImageResource(R.drawable.genderviolence);
+                break;
+            case "폭력":
+                imageview.setImageResource(R.drawable.violence);
+                break;
+        }
         groupName.setText(DataList.get(groupPosition).groupName);
         return convertView;
     }
@@ -47,6 +65,18 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
         }
         TextView childName = (TextView)convertView.findViewById(R.id.fragment_preventionInfo_groupChildRow);
         childName.setText(DataList.get(groupPosition).child.get(childPosition));
+
+        final int gp = groupPosition, cp = childPosition;
+        childName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context.getApplicationContext(), PreventionInfoContentsActivity.class);
+                intent.putExtra("clickGroupItem",gp);
+                intent.putExtra("clickChildItem",cp);
+                context.startActivity(intent);
+            }
+        });
+
         return convertView;
     }
     @Override

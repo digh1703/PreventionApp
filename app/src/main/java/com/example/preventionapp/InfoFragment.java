@@ -1,5 +1,6 @@
 package com.example.preventionapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -44,17 +45,25 @@ public class InfoFragment extends Fragment {
         temp.child.add("폭력의 정의");
         temp.child.add("폭력에 휘말렸을 때");
         temp.child.add("주의사항");
+        temp.child.add("피해자 지원 사이트 안내");
         DataList.add(temp);
         temp = new myGroup("절도");
-        temp.child.add("단순도난");
+        temp.child.add("단순절도");
         temp.child.add("소매치기");
         temp.child.add("빈집털이");
+        temp.child.add("특수절도");
+        temp.child.add("해외에서 도난당할 시");
+        temp.child.add("분실품 찾는 사이트 안내");
         DataList.add(temp);
         temp = new myGroup("성폭력");
         temp.child.add("성폭력의 정의");
         temp.child.add("성폭력의 범주");
         temp.child.add("성폭력에 당했을 때");
-        temp.child.add("피해 지원");
+        temp.child.add("주변인이 피해를 입었을 때");
+        temp.child.add("피해자 지원 사이트 안내");
+        DataList.add(temp);
+        temp = new myGroup("강도");
+        temp.child.add("강도");
         DataList.add(temp);
 
         DropdownAdapter adapter = new DropdownAdapter(

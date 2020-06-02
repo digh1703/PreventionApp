@@ -18,14 +18,7 @@ class Listener implements OnCompleteListener<QuerySnapshot> {
     public void onComplete(@NonNull Task<QuerySnapshot> task) {
         if (task.isSuccessful()) {
             for (QueryDocumentSnapshot document : task.getResult()) {
-                contentsList.add(new BoardContentsListItem(
-                        document.getData().get("title").toString(),
-                        document.getData().get("nickname").toString(),
-                        document.getData().get("date").toString(),
-                        document.getData().get("contents").toString(),
-                        (Long)document.getData().get("replyNum"),
-                        (Long)document.getData().get("recommendNum")
-                ));
+
             }
         }
     }

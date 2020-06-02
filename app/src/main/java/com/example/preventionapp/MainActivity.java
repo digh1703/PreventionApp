@@ -1,25 +1,41 @@
 package com.example.preventionapp;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
@@ -28,11 +44,24 @@ public class MainActivity extends AppCompatActivity {
     androidx.appcompat.widget.Toolbar toolbar;
     DrawerLayout drawer;
     NavigationView navigationView;
+    private FirebaseAuth mAuth;
+    FirebaseUser user;
+    private FirebaseFirestore db;
+    TextView headerNickname;
+    TextView headerUserID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseFirestore.getInstance();
+        if(user==null){
+            finish();
+        }
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -54,9 +83,28 @@ public class MainActivity extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
 
+        View headerView = navigationView.getHeaderView(0);
+
+        headerNickname = (TextView) headerView.findViewById(R.id.header_userNickname);
+        headerUserID = (TextView) headerView.findViewById(R.id.header_userID);
+
+        db.collection("user").document(user.getUid())
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot d = task.getResult();
+                    if(d.exists())
+                        headerNickname.setText(d.getString("nickname"));
+                }
+            }
+        });
+        headerUserID.setText(user.getDisplayName());
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_menu);
 
+        //drawer 관련
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,
                 drawer,
@@ -78,7 +126,8 @@ public class MainActivity extends AppCompatActivity {
                         drawer.closeDrawer(Gravity.LEFT);
                         return true;
                     case R.id.nav_1:
-                        Toast.makeText(getApplicationContext(), "SelectedItem 1", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), CrimeMap.class);
+                        startActivity(intent);
                         return true;
                     case R.id.nav_2:
                         fragmentTransaction.replace(R.id.activity_main_fragment, new CallFragment());
@@ -99,18 +148,30 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         return true;
                     case R.id.nav_6:
-                        Toast.makeText(getApplicationContext(), "SelectedItem 6", Toast.LENGTH_SHORT).show();
+                        fragmentTransaction.replace(R.id.activity_main_fragment, new NewsFragment());
+                        drawer.closeDrawer(Gravity.LEFT);
+                        fragmentTransaction.commit();
+                        return true;
+                    case R.id.nav_7:
+                        mAuth.signOut();
                         return true;
                 }
                 return true;
             }
+
         });
 
-        //if(FirebaseAuth.getInstance().getCurrentUser()==null){
-       //     startSignUpActivity();
-       // }
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(getSupportFragmentManager().findFragmentById(R.id.activity_main_fragment).getClass().equals(BoardFragment.class)){
+            System.out.println("fragment found");
+
+        }
+    }
 
     //activity_main id.main_toolbar 에 menu , main_toolbar.xml을 더하는 과정
     @Override
@@ -136,22 +197,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    View.OnClickListener onClickListener=new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch(v.getId()){
-                case R.id.loginButton:
-                    FirebaseAuth.getInstance().signOut();
-                    startSignUpActivity();
-                    break;
-            }
-
-        }
-    };
-
-    private void startSignUpActivity(){
-        Intent intent=new Intent(this,SignupActivity.class);
-        startActivity(intent);
-    }
+    
 
 }

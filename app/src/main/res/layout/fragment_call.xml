@@ -23,9 +23,8 @@
             android:paddingRight="20dp"
             android:drawableLeft="@mipmap/call"
             android:linksClickable="false"
-            android:background="@color/colorPrimary"
+            android:background="#ffffff"
             android:text="통화 신고"
-            android:textColor="#ffffff"
             android:textSize="20dp"></Button>
 
         <Button
@@ -35,7 +34,7 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:drawableLeft="@mipmap/message_icon"
+            android:drawableLeft="@mipmap/message"
             android:background="#ffffff"
             android:text="문자 신고"
             android:textSize="20dp"
@@ -48,7 +47,7 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:drawableLeft="@mipmap/call"
+            android:drawableLeft="@mipmap/setting"
             android:background="#ffffff"
             android:text="긴급 신고 설정"
             android:textSize="20dp"

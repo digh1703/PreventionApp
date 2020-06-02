@@ -39,9 +39,11 @@
     </LinearLayout>
     <Button
         android:id="@+id/activity_boardContentsWrite_btn_write"
-        android:layout_width="100dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:textColor="#ffffff"
         android:text="입력 완료"/>
 
 </LinearLayout>

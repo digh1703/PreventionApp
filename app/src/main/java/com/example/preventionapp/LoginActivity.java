@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
+        findViewById(R.id.activity_login_signUpButton).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener= new View.OnClickListener() {
@@ -35,15 +36,17 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.loginButton:
-                    Log.e("클릭","클릭");
-                    signUP();
+                    login();
+                    break;
+                case R.id.activity_login_signUpButton:
+                    Intent intent=new Intent(getApplicationContext(), SignUpActivity.class);
+                    startActivity(intent);
                     break;
             }
         }
     };
 
-    private void signUP() {
-
+    private void login() {
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
 
@@ -82,4 +85,5 @@ public class LoginActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
 }

@@ -43,17 +43,18 @@
             android:layout_height="12dp"
             android:layout_marginTop="4dp"
             android:layout_marginLeft="244dp"
-            android:layout_marginRight="5dp"
-            android:background="@color/colorPrimary"
+            android:background="@mipmap/recommend_icon"
             />
         <TextView
             android:id="@+id/activity_boardContents_replyListItem_recommendNum"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="3dp"
             android:layout_marginRight="5dp"
-            android:background="@color/colorPrimary"
-            android:text="좋아요"
+            android:textColor="@color/colorFont2"
+            android:gravity="center"
+            android:textSize="10dp"
+            android:text="0"
             />
     </LinearLayout>
 

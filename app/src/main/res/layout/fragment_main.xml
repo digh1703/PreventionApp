@@ -18,51 +18,159 @@
     <TableLayout
         android:id="@+id/activity_main_TableLay_btnMenu"
         android:layout_width="280dp"
-        android:layout_height="152dp"
+        android:layout_height="172dp"
         android:layout_gravity="center"
         android:layout_marginTop="-30dp"
         android:background="#ffffff"
         android:elevation="10dp"
         android:stretchColumns="0, 1, 2">
-
-        <TableRow>
-
-            <View
+        <TableRow
+            android:layout_marginTop="7dp">
+            <LinearLayout
+                android:id="@+id/fragment_main_mapButton"
                 android:layout_width="80dp"
                 android:layout_height="76dp"
-                android:background="#919191" />
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/map"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    />
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGray"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:textAlignment="center"
+                    android:text="내 위치 확인"/>
+            </LinearLayout>
 
-            <View
+            <LinearLayout
+                android:id="@+id/fragment_main_callButton"
                 android:layout_width="80dp"
                 android:layout_height="76dp"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:background="#6A5B5B" />
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/phone"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    />
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGray"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:textAlignment="center"
+                    android:text="신고"/>
+            </LinearLayout>
 
-            <View
+            <LinearLayout
+                android:id="@+id/fragment_main_careButton"
                 android:layout_width="80dp"
                 android:layout_height="76dp"
-                android:background="#919191" />
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/care"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    />
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGray"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:textAlignment="center"
+                    android:text="케어"/>
+            </LinearLayout>
         </TableRow>
 
         <TableRow>
-
-            <View
+            <LinearLayout
+                android:id="@+id/fragment_main_infoButton"
                 android:layout_width="80dp"
                 android:layout_height="76dp"
-                android:background="#6A5B5B" />
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/info"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    />
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGray"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:textAlignment="center"
+                    android:text="범죄정보"/>
+            </LinearLayout>
 
-            <View
+
+            <LinearLayout
+                android:id="@+id/fragment_main_boardButton"
                 android:layout_width="80dp"
                 android:layout_height="76dp"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp"
-                android:background="#919191" />
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/comment_icon"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    />
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGray"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:textAlignment="center"
+                    android:text="게시판"/>
+            </LinearLayout>
 
-            <View
+            <LinearLayout
+                android:id="@+id/fragment_main_newsButton"
                 android:layout_width="80dp"
                 android:layout_height="76dp"
-                android:background="#6A5B5B" />
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/news"
+                    android:layout_gravity="center"
+                    android:background="#00000000"
+                    />
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorGray"
+                    android:textColor="#ffffff"
+                    android:textSize="12dp"
+                    android:textAlignment="center"
+                    android:text="뉴스"/>
+            </LinearLayout>
         </TableRow>
     </TableLayout>
 
@@ -76,20 +184,26 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="5dp"
-                android:text="게시판" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorFont"
+                android:layout_gravity="center_vertical"
+                android:text="게시글" />
 
             <Button
                 android:id="@+id/activity_main_btn_moreInfo"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="200dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="170dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorFont"
                 android:text=">더보기" />
         </LinearLayout>
 

@@ -33,6 +33,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class BoardContentsActivity extends AppCompatActivity {
     private TextView titleView;
     private TextView contentsView;
     private String contentsNickname;
-    private String contentsDate;
+    private Timestamp contentsDate;
 
     FirebaseUser user;
     FirebaseFirestore db;
@@ -62,7 +63,7 @@ public class BoardContentsActivity extends AppCompatActivity {
     private String nickname;
     private Timestamp date;
     private String replyContents;
-    private int recommendNum;
+    private long recommendNum;
     private Button replyBtn;
     private ListView replyList;
 
@@ -90,17 +91,32 @@ public class BoardContentsActivity extends AppCompatActivity {
         replyBtn = (Button)findViewById(R.id.activity_boardContents_btn_reply);
         replyList = (ListView)findViewById(R.id.activity_boardContents_LV_reply);
 
-        boardContentsList = new ArrayList<BoardContentsListItem>();
+        boardContentsList = new BoardFragment().getContentsList();
         Intent intent = getIntent();
-        contentsDate = intent.getStringExtra("date");
+        int position = intent.getIntExtra("position",0);
+
+        contentsDate = boardContentsList.get(position).getDate();
+        contentsNickname = boardContentsList.get(position).getNickname();
+        recommendNum = boardContentsList.get(position).getRecommendNum();
+
+        titleView.setText(boardContentsList.get(position).getTitle());
+        nicknameView.setText(boardContentsList.get(position).getNickname());
+        dateView.setText(boardContentsList.get(position).getDate().toDate().toString());
+        recommendView.setText(String.valueOf(boardContentsList.get(position).getRecommendNum()));
+        contentsView.setText(boardContentsList.get(position).getContents());
+
+/*
+        contentsDate = (Timestamp)intent.getSerializableExtra("date");
         contentsNickname = intent.getStringExtra("nickname");
+        recommendNum = intent.getLongExtra("recommendNum",0);
 
         titleView.setText(intent.getStringExtra("title"));
         nicknameView.setText(intent.getStringExtra("nickname"));
         dateView.setText(intent.getStringExtra("date"));
-        recommendView.setText(intent.getStringExtra("recommendNum"));
+        recommendView.setText(String.valueOf(recommendNum));
         contentsView.setText(intent.getStringExtra("contents"));
 
+ */
         recommendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,20 +151,16 @@ public class BoardContentsActivity extends AppCompatActivity {
                 date = Timestamp.now();
                 recommendNum = 0;
                 createReplyContents(contentsNickname, contentsDate,new ReplyContentsListItem(nickname,date,replyContents,recommendNum));
+
             }
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.board_toolbar, menu);
+        menuInflater.inflate(R.menu.boardcontents_toolbar, menu);
         return true;
     }
 
@@ -158,11 +170,12 @@ public class BoardContentsActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.board_toolbar_search:
+            case R.id.boardcontents_toolbar_modify:
                 Toast.makeText(getApplicationContext(), "search", Toast.LENGTH_SHORT).show();
                 return true;
-            case R.id.board_toolbar_option:
-
+            case R.id.boardcontents_toolbar_delete:
+                deleteContents();
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -181,7 +194,7 @@ public class BoardContentsActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 sfDocRef[0] = db.collection("boardContents").document(document.getId());
-                                System.out.println("good");
+
                                 db.runTransaction(new Transaction.Function<Long>() {
                                     @Override
                                     public Long apply(Transaction transaction) throws FirebaseFirestoreException {
@@ -206,7 +219,6 @@ public class BoardContentsActivity extends AppCompatActivity {
                                         //Log.w(TAG, "Transaction failure.", e);
                                     }
                                 });
-
                             }
                         } else {
                             // Log.d(TAG, "Error getting documents: ", task.getException());
@@ -217,22 +229,96 @@ public class BoardContentsActivity extends AppCompatActivity {
 
     }
 
-    public void createReplyContents(final String contentsNickname, String contentsDate, final ReplyContentsListItem data) {
-        if(user != null){
+    public void createReplyContents(final String contentsNickname, Timestamp contentsDate, final ReplyContentsListItem data) {
+        /*
+        상위 컬렉션 boardContents, nickname/date 부분 검색 - 검색 받은 결과(task)를 QueryDocumentSnapshot document에 저장
+        1차 결과로 선택한 게시글에 맞는 reply 컬렉션 검색 - 서버에 저장하고 동시에 클라 replyContentsList에 저장
+
+        덧글 개수 갱신은 여러 사용자가 동시에 접근할 수 있어서 runTransaction 사용
+         */
+        if (user != null) {
+            //1차 검색
             db.collection("boardContents")
                     .whereEqualTo("nickname", contentsNickname)
-                    .whereEqualTo("date",contentsDate)
+                    .whereEqualTo("date", contentsDate)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
+                                    //2차 검색
                                     db.collection("boardContents").document(document.getId()).
                                             collection("reply").add(data);
+                                    replyContentsList.add(0, new ReplyContentsListItem(
+                                            data.getNickname(),
+                                            data.getDate(),
+                                            data.getContents(),
+                                            data.getRecommendNum()
+                                    ));
+                                    final DocumentReference sfDocRef = db.collection("boardContents").document(document.getId());
+                                    //덧글 갯수 갱신
+                                    db.runTransaction(new Transaction.Function<Long>() {
+                                        @Override
+                                        public Long apply(Transaction transaction) throws FirebaseFirestoreException {
+                                            DocumentSnapshot snapshot = transaction.get(sfDocRef);
+                                            long newPopulation = snapshot.getLong("replyNum") + 1;
+                                            if (newPopulation <= 99) {
+                                                transaction.update(sfDocRef, "replyNum", newPopulation);
+                                                return newPopulation;
+                                            } else {
+                                                throw new FirebaseFirestoreException("Population too high",
+                                                        FirebaseFirestoreException.Code.ABORTED);
+                                            }
+                                        }
+                                    });
+                                }
+                                adapter.notifyDataSetChanged();
+                                replyList.setAdapter(adapter);
+                            } else {
+                                // Log.d(TAG, "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+        }
+    }
+
+    public void deleteContents() {
+        /*
+        createReplyContents 와 구조 동일
+        하위 컬렉션(reply) 삭제후 상위 컬렉션(boardContents) 삭제
+         */
+        if (user != null) {
+            db.collection("boardContents")
+                    .whereEqualTo("nickname", contentsNickname)
+                    .whereEqualTo("date", contentsDate)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    //하위 컬렉션(reply) 삭제후 상위 컬렉션(boardContents) 삭제
+                                    db.collection("boardContents").document(document.getId()).
+                                            collection("reply").document()
+                                            .delete()
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            });
+                                    db.collection("boardContents").document(document.getId())
+                                            .delete()
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            });
                                 }
                             } else {
-                               // Log.d(TAG, "Error getting documents: ", task.getException());
+                                // Log.d(TAG, "Error getting documents: ", task.getException());
                             }
                         }
                     });
@@ -240,6 +326,11 @@ public class BoardContentsActivity extends AppCompatActivity {
     }
 
     class CreateReplyContentsList extends AsyncTask<Void,Void,String> {
+        /*
+        최초 덧글 리스트 생성
+       createReplyContents 와 구조 동일
+       덧글 생성을 date 기준으로 내림차순
+        */
         @Override
         protected String doInBackground(Void... voids) {
             db.collection("boardContents")
@@ -260,10 +351,10 @@ public class BoardContentsActivity extends AppCompatActivity {
                                             if (task.isSuccessful()) {
                                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                                     replyContentsList.add(new ReplyContentsListItem(
-                                                            document.getData().get("nickname").toString(),
-                                                            (Timestamp) document.getData().get("date"),
-                                                            document.getData().get("contents").toString(),
-                                                            (Long) document.getData().get("recommendNum")
+                                                            document.getString("nickname"),
+                                                            document.getTimestamp("date"),
+                                                            document.getString("contents"),
+                                                            document.getLong("recommendNum")
                                                     ));
                                                 }
                                             }

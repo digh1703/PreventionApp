@@ -15,15 +15,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class BoardContentsWriteActivity extends AppCompatActivity {
     androidx.appcompat.widget.Toolbar toolbar;
@@ -36,12 +41,10 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
     private long number;
     private String title;
     private String nickname;
-    private String date;
+    private Timestamp date;
     private String contents;
     private long replyNum;
     private long recommendNum;
-
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,14 +79,14 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
                 }
 
                 nickname = "";
-                long now = System.currentTimeMillis();
-                Date nowDate = new Date(now);
-                SimpleDateFormat sdfNow = new SimpleDateFormat("yy/MM/dd HH/MM/SS");
-                String formatDate = sdfNow.format(nowDate);
-                date = formatDate;
+                date = Timestamp.now();
                 replyNum = 0;
                 recommendNum = 0;
-                update(new BoardContentsListItem(title,nickname,date,contents,replyNum,recommendNum));
+                BoardContentsListItem item = new BoardContentsListItem(title,nickname,date,contents,replyNum,recommendNum);
+                update(item);
+                Intent intent = new Intent();
+                intent.putExtra("item",item);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -107,13 +110,15 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
         }
     }
 
-    public void update(BoardContentsListItem data) {
+    public void update(final BoardContentsListItem data) {
         if(user != null){
             db.collection("boardContents").add(data)
                     .addOnSuccessListener(new OnSuccessListener() {
                         @Override
                         public void onSuccess(Object o) {
                             Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
+                            BoardFragment boardFragment = new BoardFragment();
+                            boardFragment.addContentsList(data);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -122,6 +127,9 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "추가 실패", Toast.LENGTH_SHORT).show();
                         }
                     });
+        }
+        else{
+            //아이디가 없는 에러
         }
     }
 

@@ -1,14 +1,22 @@
 package com.example.preventionapp;
 
-public class BoardContentsListItem {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.firebase.Timestamp;
+
+import java.io.Serializable;
+
+public class BoardContentsListItem implements Parcelable {
+
     private String title;
     private String nickname;
-    private String date;
+    private Timestamp date;
     private String contents;
     private long replyNum;
     private long recommendNum;
 
-    public BoardContentsListItem(String title, String nickname, String date, String contents, Long replyNum, Long recommendNum) {
+    public BoardContentsListItem(String title, String nickname, Timestamp date, String contents, Long replyNum, Long recommendNum) {
         this.title = title;
         this.nickname = nickname;
         this.date = date;
@@ -16,6 +24,27 @@ public class BoardContentsListItem {
         this.replyNum = replyNum;
         this.recommendNum = recommendNum;
     }
+
+    protected BoardContentsListItem(Parcel in) {
+        title = in.readString();
+        nickname = in.readString();
+        date = in.readParcelable(Timestamp.class.getClassLoader());
+        contents = in.readString();
+        replyNum = in.readLong();
+        recommendNum = in.readLong();
+    }
+
+    public static final Creator<BoardContentsListItem> CREATOR = new Creator<BoardContentsListItem>() {
+        @Override
+        public BoardContentsListItem createFromParcel(Parcel in) {
+            return new BoardContentsListItem(in);
+        }
+
+        @Override
+        public BoardContentsListItem[] newArray(int size) {
+            return new BoardContentsListItem[size];
+        }
+    };
 
     public String getTitle() {
         return title;
@@ -33,11 +62,11 @@ public class BoardContentsListItem {
         this.nickname = nickname;
     }
 
-    public String getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -65,4 +94,20 @@ public class BoardContentsListItem {
         this.recommendNum = recommendNum;
     }
 
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(nickname);
+        dest.writeParcelable(date, flags);
+        dest.writeString(contents);
+        dest.writeLong(replyNum);
+        dest.writeLong(recommendNum);
+    }
 }

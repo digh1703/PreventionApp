@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ReplyContentsListAdapter extends BaseAdapter {
@@ -44,7 +45,9 @@ public class ReplyContentsListAdapter extends BaseAdapter {
         TextView recommendNumView = (TextView) v.findViewById(R.id.activity_boardContents_replyListItem_recommendNum);
 
         nicknameView.setText(list.get(position).getNickname());
-        dateView.setText(list.get(position).getDate().toDate().toString());
+        SimpleDateFormat sdfNow = new SimpleDateFormat("yy/MM/dd HH:mm");
+        String formatDate = sdfNow.format(list.get(position).getDate().toDate());
+        dateView.setText(formatDate);
         contentsView.setText(list.get(position).getContents());
 
         recommendNumView.setText(""+list.get(position).getRecommendNum());
