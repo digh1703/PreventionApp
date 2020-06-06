@@ -2,6 +2,7 @@ package com.example.preventionapp;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -30,6 +31,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -40,28 +42,23 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
 
-    AppBarConfiguration mAppBarConfiguration;
-    androidx.appcompat.widget.Toolbar toolbar;
-    DrawerLayout drawer;
-    NavigationView navigationView;
-    private FirebaseAuth mAuth;
-    FirebaseUser user;
-    private FirebaseFirestore db;
-    TextView headerNickname;
-    TextView headerUserID;
+    private AppBarConfiguration mAppBarConfiguration;
+    private androidx.appcompat.widget.Toolbar toolbar;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+    private AppInfo appInfo;
 
+    private FirebaseFirestore db;
+    private TextView headerNickname;
+    private TextView headerUserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
-
-        user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
-        if(user==null){
-            finish();
-        }
 
+        appInfo = AppInfo.getAppInfo();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -87,19 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
         headerNickname = (TextView) headerView.findViewById(R.id.header_userNickname);
         headerUserID = (TextView) headerView.findViewById(R.id.header_userID);
-
-        db.collection("user").document(user.getUid())
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot d = task.getResult();
-                    if(d.exists())
-                        headerNickname.setText(d.getString("nickname"));
-                }
-            }
-        });
-        headerUserID.setText(user.getDisplayName());
+        headerNickname.setText(this.appInfo.getUserData().getNickname());
+        headerUserID.setText(this.appInfo.getUser().getEmail());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toolbar_menu);
@@ -114,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(actionBarDrawerToggle);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -153,15 +138,13 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         return true;
                     case R.id.nav_7:
-                        mAuth.signOut();
+
                         return true;
                 }
                 return true;
             }
 
         });
-
-
     }
 
     @Override
@@ -169,8 +152,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if(getSupportFragmentManager().findFragmentById(R.id.activity_main_fragment).getClass().equals(BoardFragment.class)){
             System.out.println("fragment found");
-
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     //activity_main id.main_toolbar 에 menu , main_toolbar.xml을 더하는 과정
@@ -196,7 +183,5 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    
 
 }

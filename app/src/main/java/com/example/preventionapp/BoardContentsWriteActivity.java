@@ -2,6 +2,7 @@ package com.example.preventionapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,6 +36,9 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
     private EditText titleEdit;
     private EditText contentsEdit;
 
+    private AppInfo appInfo;
+    private BoardContentsList boardContentsList;
+
     FirebaseUser user;
 
     FirebaseFirestore db;
@@ -50,7 +54,9 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boardcontentswrite);
-        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        appInfo = AppInfo.getAppInfo();
+        boardContentsList = BoardContentsList.getboardContentsList();
         db = FirebaseFirestore.getInstance();
 
         toolbar = (androidx.appcompat.widget.Toolbar)findViewById(R.id.toolbar);
@@ -78,15 +84,12 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
                     return;
                 }
 
-                nickname = "";
+                nickname = BoardContentsWriteActivity.this.appInfo.getUserData().getNickname();
                 date = Timestamp.now();
                 replyNum = 0;
                 recommendNum = 0;
                 BoardContentsListItem item = new BoardContentsListItem(title,nickname,date,contents,replyNum,recommendNum);
                 update(item);
-                Intent intent = new Intent();
-                intent.putExtra("item",item);
-                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -111,14 +114,13 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
     }
 
     public void update(final BoardContentsListItem data) {
-        if(user != null){
+        if(appInfo.getUser() != null){
             db.collection("boardContents").add(data)
                     .addOnSuccessListener(new OnSuccessListener() {
                         @Override
                         public void onSuccess(Object o) {
                             Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
-                            BoardFragment boardFragment = new BoardFragment();
-                            boardFragment.addContentsList(data);
+                            BoardContentsWriteActivity.this.boardContentsList.add(data);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -129,8 +131,7 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
                     });
         }
         else{
-            //아이디가 없는 에러
+           Log.d("1","user access fail");
         }
     }
-
 }

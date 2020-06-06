@@ -14,6 +14,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -34,8 +35,9 @@ import java.util.List;
 
 public class BoardFragment extends Fragment {
 
+    private AppInfo appInfo;
     private ListView listview;
-    private static List<BoardContentsListItem> contentsList;
+    private BoardContentsList boardContentsList;
     private BoardContentsListAdapter adapter;
 
     private FirebaseUser user;
@@ -45,9 +47,23 @@ public class BoardFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.board_toolbar,menu);
-        super.onCreateOptionsMenu(menu, inflater);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        appInfo = AppInfo.getAppInfo();
+
+        this.listview = (ListView) getView().findViewById(R.id.fragment_board_LV_contentsList);
+        this.boardContentsList = BoardContentsList.getboardContentsList();
+
+        this.adapter = new BoardContentsListAdapter(this.getContext(), boardContentsList, this);
+        this.listview.setAdapter(adapter);
+        this.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), BoardContentsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -55,75 +71,44 @@ public class BoardFragment extends Fragment {
         setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_board, container, false);
     }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
-        listview = (ListView) getView().findViewById(R.id.fragment_board_LV_contentsList);
-        contentsList = new ArrayList<BoardContentsListItem>();
 
-        BackgroundTask backgroundTask = new BackgroundTask();
-        backgroundTask.execute();
-
-        adapter = new BoardContentsListAdapter(this.getContext(), contentsList, this);
-        listview.setAdapter(null);
-        listview.setAdapter(adapter);
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView,
-                                    View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), BoardContentsActivity.class);
-                intent.putExtra("position",position);
-                startActivityForResult(intent, 0);
-                //startActivity(intent);
-            }
-        });
-
-        System.out.println("프래그먼트 생성");
+        CreateContentsList createContentsList = new CreateContentsList();
+        createContentsList.execute();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
 
     @Override
     public void onStart() {
         super.onStart();
-        BackgroundTask backgroundTask = new BackgroundTask();
+        CreateContentsList backgroundTask = new CreateContentsList();
         backgroundTask.execute();
-        for(int i=0;i<contentsList.size();i++) {
-            System.out.println(contentsList.get(i).getContents());
+        for(int i=0;i<boardContentsList.size();i++) {
+            System.out.println(boardContentsList.get(i).getContents());
         }
 
     }
 
-    class SetList extends AsyncTask<Void,Void,String> {
-        @Override
-        protected String doInBackground(Void... voids) {
 
-            return null;
-        }
-        @Override
-        public void onPostExecute(String result){
-            if (contentsList.size() > 0) {    //데이타가 추가, 수정되었을때
-                adapter.notifyDataSetChanged();
-            } else {    //뷰에 표시될 데이타가 없을때
-                adapter.notifyDataSetInvalidated();
-            }
-            listview.setAdapter(adapter);
-            return;
-        }
-
-        @Override
-        public void onProgressUpdate(Void... values){
-            super.onProgressUpdate(values);
-        }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.board_toolbar,menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
-
 
     //메인에서 작업이 느려져서 추가
-    class BackgroundTask extends AsyncTask<Void,Void,String> {
+    class CreateContentsList extends AsyncTask<Void,Void,String> {
         @Override
         protected String doInBackground(Void... Voids) {
             db.collection("boardContents")
@@ -132,11 +117,11 @@ public class BoardFragment extends Fragment {
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            contentsList.clear();
+                            BoardFragment.this.boardContentsList.clear();
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     //Log.d(TAG, document.getId() + " => " + document.getData());
-                                    contentsList.add(new BoardContentsListItem(
+                                    BoardFragment.this.boardContentsList.add(new BoardContentsListItem(
                                             document.getData().get("title").toString(),
                                             document.getData().get("nickname").toString(),
                                             document.getTimestamp("date"),
@@ -153,24 +138,51 @@ public class BoardFragment extends Fragment {
                     });
             return null;
         }
+    }
+
+
+
+
+
+
+
+
+    class SetList extends AsyncTask<Void,Void,String> {
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            return null;
+        }
+        @Override
+        public void onPostExecute(String result){
+            if (boardContentsList.size() > 0) {    //데이타가 추가, 수정되었을때
+                adapter.notifyDataSetChanged();
+            } else {    //뷰에 표시될 데이타가 없을때
+                adapter.notifyDataSetInvalidated();
+            }
+            listview.setAdapter(adapter);
+            return;
+        }
 
         @Override
         public void onProgressUpdate(Void... values){
             super.onProgressUpdate(values);
         }
-
     }
 
+
+
+
     public List<BoardContentsListItem> getContentsList() {
-        return this.contentsList;
+        return this.boardContentsList;
     }
 
     public void addContentsList(BoardContentsListItem contents) {
-        contentsList.add(0,contents);
+        this.boardContentsList.add(0,contents);
     }
 
     public void deleteContentsList(int index) {
-        contentsList.remove(index);
+        this.boardContentsList.remove(index);
     }
 
     @Override
@@ -179,14 +191,9 @@ public class BoardFragment extends Fragment {
         if (requestCode == 0) {
             if (resultCode == getActivity().RESULT_OK) {
                 BoardContentsListItem item = data.getParcelableExtra("data");
-                contentsList.add(0,item);
-                //SetList setList = new SetList();
-                //setList.execute();
-
+                boardContentsList.add(0,item);
             }
         }
-
     }
-
 }
 

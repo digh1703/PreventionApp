@@ -1,6 +1,7 @@
 package com.example.preventionapp;
 
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,22 +12,41 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG="SignUpActivity";
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private AppInfo appInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        //중복 실행 방지
+        if (!isTaskRoot()) {
+            Intent intent = getIntent();
+            String action = intent.getAction();
+            if (intent.hasCategory("android.intent.category.LAUNCHER") && action != null && action.equals("android.intent.action.MAIN")) {
+                finish();
+                return;
+            }
+        }
+        appInfo = AppInfo.getAppInfo();
         mAuth = FirebaseAuth.getInstance();
-
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
         findViewById(R.id.activity_login_signUpButton).setOnClickListener(onClickListener);
     }
@@ -56,29 +76,51 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                startToast("로그인에 성공하였습니다.");
-                                startMainActivity();
+                                final AppInfo appInfo = AppInfo.getAppInfo();
+                                appInfo.setmAuth(mAuth);
+                                appInfo.setUser(mAuth.getCurrentUser());
 
-                            } else {
-                                if (task.getException() != null) {
-                                    startToast(task.getException().toString());
-                                }
-
+                                db = FirebaseFirestore.getInstance();
+                                DocumentReference documentReference = db.collection("user").document(appInfo.getUser().getUid());
+                                System.out.println(documentReference.getPath());
+                                System.out.println(documentReference.get().isComplete());
+                                documentReference.get()
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        })
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    DocumentSnapshot documentSnapshot = task.getResult();
+                                                    User user = new User(
+                                                            documentSnapshot.getString("nickname"),
+                                                            documentSnapshot.getString("name"),
+                                                            documentSnapshot.getString("residenceEdit"),
+                                                            documentSnapshot.getString("phoneNumber"),
+                                                            documentSnapshot.getString("gender")
+                                                    );
+                                                    appInfo.getAppInfo().setUserData(user);
+                                                    startToast("로그인에 성공하였습니다.");
+                                                    startMainActivity();
+                                                } else {
+                                                    System.out.println(task.getException().toString());
+                                                }
+                                            }
+                                        });
                             }
                         }
                     });
-
         }else {
             startToast("이메일 또는 비밀번호를 입력해주세요.");
         }
     }
     private void startToast(String msg){
-
         Toast.makeText(this, msg,
                 Toast.LENGTH_SHORT).show();
-
     }
     private void startMainActivity(){
         Intent intent=new Intent(this,MainActivity.class);

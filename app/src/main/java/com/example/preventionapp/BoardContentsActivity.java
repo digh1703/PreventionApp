@@ -34,11 +34,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BoardContentsActivity extends AppCompatActivity {
 
+    AppInfo appInfo;
     androidx.appcompat.widget.Toolbar toolbar;
 
     private List<BoardContentsListItem> boardContentsList;
@@ -71,12 +73,12 @@ public class BoardContentsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boardcontents);
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        setContentView(R.layout.activity_boardcontents);
         db = FirebaseFirestore.getInstance();
+        appInfo = AppInfo.getAppInfo();
 
         toolbar = (androidx.appcompat.widget.Toolbar)findViewById(R.id.toolbar);
         setTitle("");
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -101,7 +103,9 @@ public class BoardContentsActivity extends AppCompatActivity {
 
         titleView.setText(boardContentsList.get(position).getTitle());
         nicknameView.setText(boardContentsList.get(position).getNickname());
-        dateView.setText(boardContentsList.get(position).getDate().toDate().toString());
+        SimpleDateFormat sdfNow = new SimpleDateFormat("yy/MM/dd HH:mm");
+        String formatDate = sdfNow.format(boardContentsList.get(position).getDate().toDate());
+        dateView.setText(formatDate);
         recommendView.setText(String.valueOf(boardContentsList.get(position).getRecommendNum()));
         contentsView.setText(boardContentsList.get(position).getContents());
 
@@ -151,13 +155,11 @@ public class BoardContentsActivity extends AppCompatActivity {
                 date = Timestamp.now();
                 recommendNum = 0;
                 createReplyContents(contentsNickname, contentsDate,new ReplyContentsListItem(nickname,date,replyContents,recommendNum));
-
             }
         });
     }
 
-
-    @Override
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.boardcontents_toolbar, menu);

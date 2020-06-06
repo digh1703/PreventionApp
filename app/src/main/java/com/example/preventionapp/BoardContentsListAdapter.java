@@ -16,12 +16,12 @@ public class BoardContentsListAdapter extends BaseAdapter{
     private List<BoardContentsListItem> list;
     private Fragment parent;
 
-    TextView titleView;
-    TextView nicknameView;
-    TextView commentNumView;
-    TextView dateView;
-    TextView contentsView;
-    TextView recommendNumView;
+    private TextView titleView;
+    private TextView nicknameView;
+    private TextView commentNumView;
+    private TextView dateView;
+    private TextView contentsView;
+    private TextView recommendNumView;
 
     public BoardContentsListAdapter(Context context, List<BoardContentsListItem> list, Fragment parent) {
         this.context = context;
