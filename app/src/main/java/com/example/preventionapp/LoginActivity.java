@@ -82,8 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 db = FirebaseFirestore.getInstance();
                                 DocumentReference documentReference = db.collection("user").document(appInfo.getUser().getUid());
-                                System.out.println(documentReference.getPath());
-                                System.out.println(documentReference.get().isComplete());
+
                                 documentReference.get()
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
@@ -103,6 +102,11 @@ public class LoginActivity extends AppCompatActivity {
                                                             documentSnapshot.getString("phoneNumber"),
                                                             documentSnapshot.getString("gender")
                                                     );
+                                                    if(user.getNickname().equals("")){
+                                                        startToast("로그인에 실패하였습니다.");
+                                                        return;
+                                                    }
+
                                                     appInfo.getAppInfo().setUserData(user);
                                                     startToast("로그인에 성공하였습니다.");
                                                     startMainActivity();

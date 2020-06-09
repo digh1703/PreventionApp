@@ -1,5 +1,6 @@
 package com.example.preventionapp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -17,9 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private TextView headerNickname;
     private TextView headerUserID;
+
+    private final int REQUEST_UPDATE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,9 +155,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(getSupportFragmentManager().findFragmentById(R.id.activity_main_fragment).getClass().equals(BoardFragment.class)){
-            System.out.println("fragment found");
-        }
     }
 
     @Override
@@ -177,11 +179,29 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.board_toolbar_option:
                 Intent intent = new Intent(getApplicationContext(),BoardContentsWriteActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,REQUEST_UPDATE);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == REQUEST_UPDATE){
+                if(getSupportFragmentManager().findFragmentById(R.id.activity_main_fragment).getClass().equals(BoardFragment.class)){
+                    Boolean updateCheck = data.getBooleanExtra("update",false);
+                    //boardContentsWriteActivity 에서 넘어오는 정보 확인
+                    //업데이트(글쓰기)가 이루어지지 않았다면
+                    if(updateCheck){
+                        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.activity_main_fragment);
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.detach(fragment).attach(fragment).commit();
+                    }
+                }
+            }
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.preventionapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,10 +40,8 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
     private AppInfo appInfo;
     private BoardContentsList boardContentsList;
 
-    FirebaseUser user;
 
     FirebaseFirestore db;
-    private long number;
     private String title;
     private String nickname;
     private Timestamp date;
@@ -57,7 +56,12 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
 
         appInfo = AppInfo.getAppInfo();
         boardContentsList = BoardContentsList.getboardContentsList();
-        db = FirebaseFirestore.getInstance();
+        if(appInfo.getmAuth() != null){
+            db = FirebaseFirestore.getInstance();
+        }
+        else{
+            finish();
+        }
 
         toolbar = (androidx.appcompat.widget.Toolbar)findViewById(R.id.toolbar);
         setTitle("");
@@ -90,6 +94,9 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
                 recommendNum = 0;
                 BoardContentsListItem item = new BoardContentsListItem(title,nickname,date,contents,replyNum,recommendNum);
                 update(item);
+                Intent intent = new Intent();
+                intent.putExtra("update",true);
+                setResult(Activity.RESULT_OK,intent);
                 finish();
             }
         });
@@ -120,7 +127,7 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Object o) {
                             Toast.makeText(getApplicationContext(), "추가 완료", Toast.LENGTH_SHORT).show();
-                            BoardContentsWriteActivity.this.boardContentsList.add(data);
+                            //BoardContentsWriteActivity.this.boardContentsList.add(data);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -129,6 +136,7 @@ public class BoardContentsWriteActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "추가 실패", Toast.LENGTH_SHORT).show();
                         }
                     });
+
         }
         else{
            Log.d("1","user access fail");
