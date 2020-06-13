@@ -24,6 +24,8 @@
             android:layout_height="16dp"
             android:layout_marginLeft="120dp"
             android:layout_marginTop="2dp"
+            android:padding="0sp"
+            android:scaleType="centerCrop"
             android:src="@mipmap/recommend_icon"/>
         <ImageButton
             android:id="@+id/activity_boardContents_replyListItem_btn_option"
@@ -31,6 +33,7 @@
             android:layout_height="16dp"
             android:layout_marginTop="2dp"
             android:layout_marginLeft="3dp"
+            android:background="#00FF0000"
             android:src="@drawable/toolbar_option"/>
     </LinearLayout>
 

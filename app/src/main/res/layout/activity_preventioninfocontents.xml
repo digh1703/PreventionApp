@@ -36,6 +36,7 @@
         android:paddingTop="5dp"
         android:paddingRight="10dp"
         android:paddingBottom="5dp"
+        android:scrollbars="vertical"
         android:text="초반 정의 / 법률 용어 / 통계 정보 등등"
         android:textSize="10dp" />
 

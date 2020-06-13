@@ -2,10 +2,18 @@ package com.example.preventionapp;
 import java.util.ArrayList;
 
 public class myGroup {
-    public ArrayList<String> child;
-    public String groupName;
+    private ArrayList<String> child;
+    private String groupName;
     myGroup(String name){
-        groupName = name;
-        child = new ArrayList<String>();
+        this.groupName = name;
+        this.child = new ArrayList<String>();
+    }
+
+    public ArrayList<String> getChild() {
+        return child;
+    }
+
+    public String getGroupName() {
+        return groupName;
     }
 }

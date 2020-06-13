@@ -39,7 +39,7 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
         TextView groupName = (TextView)convertView.findViewById(R.id.fragment_preventionInfo_groupRow);
         ImageView imageview = convertView.findViewById(R.id.groupRow_image);
 
-        switch (DataList.get(groupPosition).groupName){
+        switch (DataList.get(groupPosition).getGroupName()){
             case "강도":
                 imageview.setImageResource(R.drawable.thief);
                 break;
@@ -53,7 +53,7 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
                 imageview.setImageResource(R.drawable.violence);
                 break;
         }
-        groupName.setText(DataList.get(groupPosition).groupName);
+        groupName.setText(DataList.get(groupPosition).getGroupName());
         return convertView;
     }
 
@@ -64,18 +64,9 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
             convertView = myinf.inflate(this.chlidLayout, parent, false);
         }
         TextView childName = (TextView)convertView.findViewById(R.id.fragment_preventionInfo_groupChildRow);
-        childName.setText(DataList.get(groupPosition).child.get(childPosition));
+        childName.setText(DataList.get(groupPosition).getChild().get(childPosition));
 
         final int gp = groupPosition, cp = childPosition;
-        childName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context.getApplicationContext(), PreventionInfoContentsActivity.class);
-                intent.putExtra("clickGroupItem",gp);
-                intent.putExtra("clickChildItem",cp);
-                context.startActivity(intent);
-            }
-        });
 
         return convertView;
     }
@@ -93,7 +84,7 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         // TODO Auto-generated method stub
-        return DataList.get(groupPosition).child.get(childPosition);
+        return DataList.get(groupPosition).getChild().get(childPosition);
     }
 
     @Override
@@ -105,7 +96,7 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         // TODO Auto-generated method stub
-        return DataList.get(groupPosition).child.size();
+        return DataList.get(groupPosition).getChild().size();
     }
 
     @Override

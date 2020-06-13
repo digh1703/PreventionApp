@@ -1,19 +1,15 @@
 package com.example.preventionapp;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.health.SystemHealthManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -32,7 +28,6 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
@@ -44,7 +39,31 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardContentsActivity extends AppCompatActivity {
+/*
+BoardContentsActivity
+class FindThisDocument
+현재 문서 이름 확인
+
+public void recommendBtnAction
+문서 내의 추천 버튼 관리
+
+public void modifyContents()
+현재 문서 이름(db접근을 위해) / 위치(리스트 정보 가져오기 위해) / modify 체크
+를 intent를 통해 BoardContentsWriteActivity 쪽으로 보낸다.
+
+public void deleteContents()
+
+class CreateReplyContentsList
+댓글 리스트 생성, 처음 액티비티가 만들어질때/댓글을 insert,delete 할때마다 불린다.
+
+public void insertReplyContents(final ReplyContentsListItem data)
+
+public void deleteReplyContents(int position) {
+
++DB 탐색은 닉네임과 문서 작성 시간으로 탐색
+ */
+
+public class BoardContentsActivity extends AppCompatActivity implements AccessActivity{
 
     AppInfo appInfo;
     androidx.appcompat.widget.Toolbar toolbar;
@@ -65,6 +84,7 @@ public class BoardContentsActivity extends AppCompatActivity {
 
     FirebaseFirestore db;
     private String documentID = new String();
+    private int position;
 
     private EditText replyEdit;
     private String nickname;
@@ -85,19 +105,15 @@ public class BoardContentsActivity extends AppCompatActivity {
         replyContentsList = new ArrayList<ReplyContentsListItem>();
 
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position",-1);
-        if(position == -1){
+        this.position = intent.getIntExtra("position",-1);
+        if(this.position == -1){
             Log.d("2","no data");
+            //이전화면으로 이동
         }
 
-        this.contentsDate = boardContentsList.get(position).getDate();
-        this.contentsNickname = boardContentsList.get(position).getNickname();
-        this.recommendNum = boardContentsList.get(position).getRecommendNum();
-
-
-
-
-        //findThisDocument(BoardContentsActivity.this.contentsNickname,BoardContentsActivity.this.contentsDate );
+        this.contentsDate = boardContentsList.get(this.position).getDate();
+        this.contentsNickname = boardContentsList.get(this.position).getNickname();
+        this.recommendNum = boardContentsList.get(this.position).getRecommendNum();
 
         toolbar = (androidx.appcompat.widget.Toolbar)findViewById(R.id.toolbar);
         setTitle("");
@@ -115,13 +131,13 @@ public class BoardContentsActivity extends AppCompatActivity {
         replyBtn = (Button)findViewById(R.id.activity_boardContents_btn_reply);
         replyList = (ListView)findViewById(R.id.activity_boardContents_LV_reply);
 
-        titleView.setText(boardContentsList.get(position).getTitle());
-        nicknameView.setText(boardContentsList.get(position).getNickname());
+        titleView.setText(boardContentsList.get(this.position).getTitle());
+        nicknameView.setText(boardContentsList.get(this.position).getNickname());
         SimpleDateFormat sdfNow = new SimpleDateFormat("yy/MM/dd HH:mm");
-        String formatDate = sdfNow.format(boardContentsList.get(position).getDate().toDate());
+        String formatDate = sdfNow.format(boardContentsList.get(this.position).getDate().toDate());
         dateView.setText(formatDate);
-        recommendView.setText(String.valueOf(boardContentsList.get(position).getRecommendNum()));
-        contentsView.setText(boardContentsList.get(position).getContents());
+        recommendView.setText(String.valueOf(boardContentsList.get(this.position).getRecommendNum()));
+        contentsView.setText(boardContentsList.get(this.position).getContents());
 
         recommendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,32 +154,8 @@ public class BoardContentsActivity extends AppCompatActivity {
 
         new FindThisDocument().execute();
 
-        adapter = new ReplyContentsListAdapter(getApplicationContext(),replyContentsList);
+        adapter = new ReplyContentsListAdapter(this,replyContentsList,this);
         replyList.setAdapter(adapter);
-        replyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView,
-                                    View itemView, int position, long id) {
-                itemView.findViewById(R.id.activity_boardContents_replyListItem_btn_option)
-                        .setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                AlertDialog dialog;
-                                AlertDialog.Builder builder = new AlertDialog.Builder(BoardContentsActivity.this);
-                                dialog = builder.setMessage("정말 삭제하시겠습니까?")
-                                        .setNegativeButton("아니오", null)
-                                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-
-                                            }
-                                        })
-                                        .create();
-                                dialog.show();
-                            }
-                        });
-            }
-        });
 
         replyBtn = (Button) findViewById(R.id.activity_boardContents_btn_reply);
         replyBtn.setOnClickListener(new View.OnClickListener() {
@@ -172,10 +164,10 @@ public class BoardContentsActivity extends AppCompatActivity {
                 replyContents = replyEdit.getText().toString();
 
                 if (replyContents.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BoardContentsActivity.this, "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                System.out.println("2:"+ getApplicationContext());
                 nickname = appInfo.getUserData().getNickname();
                 date = Timestamp.now();
                 recommendNum = 0;
@@ -201,15 +193,13 @@ public class BoardContentsActivity extends AppCompatActivity {
     }
 
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position", -1);
-        if (position == -1) {
-            Log.d("2", "no data");
-        }
-        if (writerCheck(BoardContentsActivity.this.appInfo, boardContentsList.get(position).getNickname())) {
+        if (writerCheck(BoardContentsActivity.this.appInfo, boardContentsList.get(this.position).getNickname())) {
             menuInflater.inflate(R.menu.boardcontents_toolbar, menu); // 삭제 가능
         } else {
             menuInflater.inflate(R.menu.boardcontents_toolbar, menu);
@@ -229,12 +219,12 @@ public class BoardContentsActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.boardcontents_toolbar_modify:
-                Toast.makeText(getApplicationContext(), "search", Toast.LENGTH_SHORT).show();
+                modifyContents();
                 return true;
             case R.id.boardcontents_toolbar_delete:
                 deleteContents();
                 Intent intent = new Intent();
-                intent.putExtra("update",true);
+                intent.putExtra("updateListRequest",true);
                 setResult(Activity.RESULT_OK,intent);
                 finish();
                 return true;
@@ -246,7 +236,6 @@ public class BoardContentsActivity extends AppCompatActivity {
     class FindThisDocument extends AsyncTask<Void,Void,String> {
         @Override
         protected String doInBackground(Void... voids) {
-            System.out.println("aaa"+contentsNickname+"/"+contentsDate);
             CollectionReference ref = db.collection("boardContents");
 
             ref.whereEqualTo("nickname", contentsNickname)
@@ -265,7 +254,7 @@ public class BoardContentsActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     documentID = documentID.concat(document.getId());
-                                    System.out.println("a  "+documentID);
+                                    System.out.println("1:"+ getApplicationContext());
                                 }
                                 new CreateReplyContentsList().execute();
                             }
@@ -275,48 +264,9 @@ public class BoardContentsActivity extends AppCompatActivity {
                         }
                     });
 
-            System.out.println("b  "+documentID);
             return null;
         }
     }
-
-/*
-    public void findThisDocument(String contentsNickname, Timestamp contentsDate){
-        final long beforeTime = System.currentTimeMillis();
-        System.out.println("aaa"+contentsNickname+"/"+contentsDate);
-        CollectionReference ref = db.collection("boardContents");
-        ref.whereEqualTo("nickname", contentsNickname)
-                .whereEqualTo("date", contentsDate)
-                .get()
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("11", "db fail.", e);
-                        e.printStackTrace();
-                    }
-                })
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                documentID = documentID.concat(document.getId());
-                                System.out.println("a  "+documentID);
-                            }
-                            long afterTime = System.currentTimeMillis(); // 코드 실행 후에 시간 받아오기
-                            long secDiffTime = (afterTime - beforeTime)/1000; //두 시간에 차 계산
-                            System.out.println("시간차이(m) : "+secDiffTime);
-                        }
-                        else{
-                            Log.w("2", "task fail.");
-                        }
-                    }
-                });
-        System.out.println("b  "+documentID);
-        return;
-    }
-
- */
 
     public void recommendBtnAction(){
         //String documentID = findThisDocument(this.contentsNickname, this.contentsDate);
@@ -352,129 +302,102 @@ public class BoardContentsActivity extends AppCompatActivity {
                 }
             });
         }
-
-
-        /*
-        final DocumentReference[] sfDocRef = new DocumentReference[1];
-        db.collection("boardContents")
-                .whereEqualTo("nickname", contentsNickname)
-                .whereEqualTo("date",contentsDate)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                sfDocRef[0] = db.collection("boardContents").document(document.getId());
-
-
-                            }
-                        } else {
-                            // Log.d(TAG, "Error getting documents: ", task.getException());
-                            System.out.println("error");
-                        }
-                    }
-                });
-
-
-         */
     }
 
+    public void modifyContents(){
+        Intent intent = new Intent(this, BoardContentsWriteActivity.class);
+        intent.putExtra("documentID",this.documentID);
+        intent.putExtra("position",this.position);
+        intent.putExtra("modify",true);
+        startActivity(intent);
+        finish();
+    }
 
-    class CreateReplyContentsList extends AsyncTask<Void,Void,String> {
+    public void deleteContents() {
         /*
-        최초 덧글 리스트 생성
-       createReplyContents 와 구조 동일
-       덧글 생성을 date 기준으로 내림차순
-        */
-        private String result;
-
-        @Override
-        protected String doInBackground(Void... voids) {
+        createReplyContents 와 구조 동일
+        하위 컬렉션(reply) 삭제후 상위 컬렉션(boardContents) 삭제
+         */
+        if (this.appInfo.getUser() != null) {
             //String documentID = findThisDocument(this.contentsNickname, this.contentsDate);
             if(documentID.equals("")){
                 Log.w("1","db fail");
+                return;
             }
-            else{
+            final DocumentReference ref = db.collection("boardContents").document(documentID);
+
+            ref.collection("reply").document()
+                    .delete()
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+            ref.delete()
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+        }
+    }
+
+    class CreateReplyContentsList extends AsyncTask<Void,Void,String> {
+         /*
+        상위 컬렉션 boardContents, nickname/date 부분 검색 - 검색 받은 결과(task)를 QueryDocumentSnapshot document에 저장
+        1차 결과로 선택한 게시글에 맞는 reply 컬렉션 검색 - 서버에 저장하고 동시에 클라 replyContentsList에 저장
+
+        덧글 개수 갱신은 여러 사용자가 동시에 접근할 수 있어서 runTransaction 사용
+         */
+        @Override
+        protected String doInBackground(Void... voids) {
+            if(documentID.equals("")){
+                Log.w("1","db fail");
+            }
+            else {
                 DocumentReference ref = db.collection("boardContents").document(documentID);
                 ref.collection("reply").orderBy("date", Query.Direction.DESCENDING)
-                        .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                        .get()
+                        .addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onEvent(@Nullable QuerySnapshot value,
-                                                @Nullable FirebaseFirestoreException e) {
-                                if (e != null) {
-                                    Log.w("1", "Listen failed.", e);
-                                    return;
-                                }
-                                replyContentsList.clear();
-                                for (QueryDocumentSnapshot doc : value) {
-                                    if (doc.get("nickname") != null) {
-                                        replyContentsList.add(new ReplyContentsListItem(
-                                                doc.getString("nickname"),
-                                                doc.getTimestamp("date"),
-                                                doc.getString("contents"),
-                                                doc.getLong("recommendNum")
-                                        ));
+                            public void onFailure(@NonNull Exception e) {
+                                e.printStackTrace();
+                            }
+                        })
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if(task.isSuccessful()){
+                                    replyContentsList.clear();
+                                    for (QueryDocumentSnapshot replyDocument : task.getResult()) {
+                                        if (replyDocument.get("nickname") != null) {
+                                            replyContentsList.add(new ReplyContentsListItem(
+                                                    replyDocument.getString("nickname"),
+                                                    replyDocument.getTimestamp("date"),
+                                                    replyDocument.getString("contents"),
+                                                    replyDocument.getLong("recommendNum")
+                                            ));
+                                        }
                                     }
+                                    updateList();
                                 }
-                                updateList();
                             }
                         });
             }
-
-
-
-/*
-            db.collection("boardContents")
-                    .whereEqualTo("nickname", contentsNickname)
-                    .whereEqualTo("date",contentsDate)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                replyContentsList.clear();
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    DocumentReference ref = db.collection("boardContents").document(document.getId());
-                                    ref.collection("reply").orderBy("date", Query.Direction.DESCENDING)
-                                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                                    replyContentsList.add(new ReplyContentsListItem(
-                                                            document.getString("nickname"),
-                                                            document.getTimestamp("date"),
-                                                            document.getString("contents"),
-                                                            document.getLong("recommendNum")
-                                                    ));
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
-                                BoardContentsActivity.this.updateList();
-                            } else {
-                                //Log.d(TAG, "Error getting documents: ", task.getException());
-                            }
-                        }
-                    });
-
- */
             return null;
         }
     }
 
     public void insertReplyContents(final ReplyContentsListItem data) {
         /*
-        상위 컬렉션 boardContents, nickname/date 부분 검색 - 검색 받은 결과(task)를 QueryDocumentSnapshot document에 저장
-        1차 결과로 선택한 게시글에 맞는 reply 컬렉션 검색 - 서버에 저장하고 동시에 클라 replyContentsList에 저장
-
-        덧글 개수 갱신은 여러 사용자가 동시에 접근할 수 있어서 runTransaction 사용
-         */
+        최초 덧글 리스트 생성
+       createReplyContents 와 구조 동일
+       덧글 생성을 date 기준으로 내림차순
+        */
         if (this.appInfo.getUser() != null) {
             //1차 검색
-            //String documentID = findThisDocument(this.contentsNickname, this.contentsDate);
             if(documentID.equals("")){
                 Log.w("1","db fail");
                 return;
@@ -510,123 +433,56 @@ public class BoardContentsActivity extends AppCompatActivity {
                     }
                 }
             });
-
-/*
-            db.collection("boardContents")
-                    .whereEqualTo("nickname", contentsNickname)
-                    .whereEqualTo("date", contentsDate)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    //2차 검색
-                                    db.collection("boardContents").document(document.getId()).
-                                            collection("reply").add(data);
-                                    replyContentsList.add(0, new ReplyContentsListItem(
-                                            data.getNickname(),
-                                            data.getDate(),
-                                            data.getContents(),
-                                            data.getRecommendNum()
-                                    ));
-                                    final DocumentReference sfDocRef = db.collection("boardContents").document(document.getId());
-                                    //덧글 갯수 갱신
-                                    db.runTransaction(new Transaction.Function<Long>() {
-                                        @Override
-                                        public Long apply(Transaction transaction) throws FirebaseFirestoreException {
-                                            DocumentSnapshot snapshot = transaction.get(sfDocRef);
-                                            long newPopulation = snapshot.getLong("replyNum") + 1;
-                                            if (newPopulation <= 99) {
-                                                transaction.update(sfDocRef, "replyNum", newPopulation);
-                                                return newPopulation;
-                                            } else {
-                                                throw new FirebaseFirestoreException("Population too high",
-                                                        FirebaseFirestoreException.Code.ABORTED);
-                                            }
-                                        }
-                                    });
-                                }
-                                BoardContentsActivity.this.updateList();
-                            } else {
-                                // Log.d(TAG, "Error getting documents: ", task.getException());
-                            }
-                        }
-                    });
-
- */
         }
     }
 
+    //AccessActivity를 이용해 replyContentsListadapter 연결하려고 추가
+    @Override
+    public void onClick(int position) {
+        deleteReplyContents(position);
+    }
 
-    public void deleteContents() {
-        /*
-        createReplyContents 와 구조 동일
-        하위 컬렉션(reply) 삭제후 상위 컬렉션(boardContents) 삭제
-         */
+    public void deleteReplyContents(int position) {
         if (this.appInfo.getUser() != null) {
-            //String documentID = findThisDocument(this.contentsNickname, this.contentsDate);
             if(documentID.equals("")){
                 Log.w("1","db fail");
                 return;
             }
             final DocumentReference ref = db.collection("boardContents").document(documentID);
 
-            ref.collection("reply").document()
-                    .delete()
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            e.printStackTrace();
-                        }
-                    });
-            ref.delete()
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            e.printStackTrace();
-                        }
-                    });
-
-            /*
-            db.collection("boardContents")
-                    .whereEqualTo("nickname", contentsNickname)
-                    .whereEqualTo("date", contentsDate)
+            ref.collection("reply")
+                    .whereEqualTo("nickname", this.replyContentsList.get(position).getNickname())
+                    .whereEqualTo("date", this.replyContentsList.get(position).getDate())
                     .get()
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            e.printStackTrace();
+                        }
+                    })
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    //하위 컬렉션(reply) 삭제후 상위 컬렉션(boardContents) 삭제
+                            if(task.isSuccessful()){
+                                for(QueryDocumentSnapshot replyDocument : task.getResult()){
+                                    ref.collection("reply").document(replyDocument.getId())
+                                            .delete()
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                            });
 
-                                    db.collection("boardContents").document(document.getId()).
-                                            collection("reply").document()
-                                            .delete()
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                            });
-                                    db.collection("boardContents").document(document.getId())
-                                            .delete()
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                            });
+                                    System.out.println(replyDocument.getId());
+                                    new CreateReplyContentsList().execute();
                                 }
-                            } else {
-                                Log.d("1", "Error DB ", task.getException());
                             }
                         }
                     });
-
-             */
         }
     }
+
 
     private Boolean writerCheck(AppInfo appInfo, String nickname){
         if(appInfo.getUserData().getNickname().equals(nickname) ){

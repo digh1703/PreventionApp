@@ -2,6 +2,8 @@ package com.example.preventionapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.os.AsyncTask;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +45,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ mainActivity
+ 네비게이션 바 설정 - 각 버튼 별 반응
+ 메뉴 main_toolbar 사용
+ */
+
 @SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
 
@@ -55,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView headerNickname;
     private TextView headerUserID;
 
-    private final int REQUEST_UPDATE = 1;
+    //private final int REQUEST_UPDATE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
         //네비게이션 뷰 내의 버튼 여기서 생성
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_2, R.id.nav_3, R.id.nav_4, R.id.nav_5 , R.id.nav_6)
+                R.id.nav_0, R.id.nav_1,R.id.nav_2, R.id.nav_3, R.id.nav_4, R.id.nav_5 , R.id.nav_6, R.id.nav_7)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -126,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_3:
                         Toast.makeText(getApplicationContext(), "SelectedItem 3", Toast.LENGTH_SHORT).show();
+                        System.out.println("3:"+ getApplicationContext());
                         return true;
                     case R.id.nav_4:
                         fragmentTransaction.replace(R.id.activity_main_fragment, new InfoFragment());
@@ -143,7 +153,9 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         return true;
                     case R.id.nav_7:
-
+                        appInfo.getmAuth().signOut();
+                        appInfo.clear();
+                        finish();
                         return true;
                 }
                 return true;
@@ -170,12 +182,13 @@ public class MainActivity extends AppCompatActivity {
         //xml activity_main 가 menu 객체로 변환
         return true;
     }
-
+/*
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.board_toolbar_search:
-                Toast.makeText(getApplicationContext(), "search", Toast.LENGTH_SHORT).show();
+                System.out.println("검색중");
+                //onSearchRequested();
                 return true;
             case R.id.board_toolbar_option:
                 Intent intent = new Intent(getApplicationContext(),BoardContentsWriteActivity.class);
@@ -185,7 +198,8 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
+*/
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -204,4 +218,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+ */
 }

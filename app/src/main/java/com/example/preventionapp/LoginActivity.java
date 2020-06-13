@@ -1,9 +1,7 @@
 package com.example.preventionapp;
 
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,18 +11,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
+/*
+LoginActivity
+login()
+-로그인 처리
+-유저의 ID 명으로 한 document 작성(닉네임 , 성별 등등)
+-AppInfo 초기화 : FirebaseAuth, FirebaseUser , userData 접근 용이를 위해 생성
+                이 객체는 getAppInfo() 을 통해 얻어내며 모든 클래스에서 생성하고 사용가능
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG="SignUpActivity";
@@ -36,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //중복 실행 방지
+        //홈버튼 누르고 앱 최소화하고 다시 실행시 중복 실행 방지
         if (!isTaskRoot()) {
             Intent intent = getIntent();
             String action = intent.getAction();
@@ -69,7 +70,6 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
-
         if (email.length() > 0 && password.length() > 0) {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

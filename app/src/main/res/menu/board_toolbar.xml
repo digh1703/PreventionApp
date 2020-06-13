@@ -6,7 +6,8 @@
         android:id="@+id/board_toolbar_search"
         android:title="search"
         app:showAsAction="always"
-        android:icon="@drawable/toolbar_search"/>
+        android:icon="@drawable/toolbar_search"
+        app:actionViewClass="android.widget.SearchView" />
 
     <item
         android:id="@+id/board_toolbar_option"

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        />
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="300dp"
+        android:paddingTop="25dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:orientation="vertical"
+        android:id="@+id/test">
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorFont2"
+                android:textSize="17dp"
+                android:text="흔들어서 통화하기"/>
+            <Spinner
+                android:layout_marginLeft="80dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorFont2"
+                android:textSize="17dp"
+                android:text="지인들에게 보낼 메시지"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/activity_message_edit"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:hint="메시지를 입력하세요" />
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorFont2"
+                android:textSize="17dp"
+                android:text="지인 추가"/>
+
+        </LinearLayout>
+
+
+
+        <ListView
+            android:layout_marginTop="10dp"
+            android:id="@+id/activity_message_list"
+            android:layout_width="280dp"
+            android:layout_height="100dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/activity_boardContentsWrite_btn_write"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="70dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffffff"
+            android:text="입력 완료"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -29,6 +29,10 @@ public class BoardContentsListAdapter extends BaseAdapter{
         this.parent = parent;
     }
 
+    public void setList(List<BoardContentsListItem> list) {
+        this.list = list;
+    }
+
     @Override
     public int getCount() {
         return list.size();
