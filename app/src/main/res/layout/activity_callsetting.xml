@@ -50,7 +50,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/activity_message_edit"
+
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/activity_boardContentsWrite_btn_write"
+
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_gravity="center"

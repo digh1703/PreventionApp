@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        />
+
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="300dp"
+        android:paddingTop="25dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:orientation="vertical"
+        android:id="@+id/test">
+
+        <TextView
+            android:id="@+id/activity_message_title"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:textColor="@color/colorFont2"
+            android:textSize="20dp"
+            android:text="메시지 신고" />
+
+        <EditText
+            android:id="@+id/activity_message_edit_contents"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="메시지로 신고를 합니다. \n\n 신고 시 현재 위치와 상황에 대해 설명해주세요." />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/activity_message_btn_write"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="70dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffffff"
+            android:text="입력 완료"/>
+    </LinearLayout>
+
+
+</LinearLayout>

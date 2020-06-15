@@ -26,7 +26,7 @@ public class CallFragment extends Fragment {
     public void onActivityCreated(Bundle b) {
         super.onActivityCreated(b);
 
-        Button call = (Button)getView().findViewById(R.id.fragment_call_call);
+        Button call = getView().findViewById(R.id.fragment_call_call);
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,14 +38,22 @@ public class CallFragment extends Fragment {
                         .setPositiveButton("예",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //String tel = "tel : 01092497712";
-                                //startActivity(new Intent("android.intent.action.CALL", Uri.parse(tel)));
+                                String tel = "tel:00000000000";
+                                //전화걸 장소 0 대신 지정, tel: 지우면 안 됨
+                                startActivity(new Intent("android.intent.action.CALL", Uri.parse(tel)));
                             }
                         })
                         .create();
                 dialog.show();
             }
         });
-        Button message = (Button)getView().findViewById(R.id.message);
+        Button message = getView().findViewById(R.id.fragment_call_message);
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
