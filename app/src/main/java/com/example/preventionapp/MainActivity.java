@@ -125,8 +125,9 @@ public class MainActivity extends AppCompatActivity {
                         drawer.closeDrawer(Gravity.LEFT);
                         return true;
                     case R.id.nav_1:
-                        Intent intent = new Intent(getApplicationContext(), CrimeMap.class);
-                        startActivity(intent);
+                        fragmentTransaction.replace(R.id.activity_main_fragment, new CrimeMapMenuFragment());
+                        fragmentTransaction.commit();
+                        drawer.closeDrawer(Gravity.LEFT);
                         return true;
                     case R.id.nav_2:
                         fragmentTransaction.replace(R.id.activity_main_fragment, new CallFragment());
@@ -134,8 +135,9 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         return true;
                     case R.id.nav_3:
-                        Toast.makeText(getApplicationContext(), "SelectedItem 3", Toast.LENGTH_SHORT).show();
-                        System.out.println("3:"+ getApplicationContext());
+                        fragmentTransaction.replace(R.id.activity_main_fragment, new CareMenuFragment());
+                        drawer.closeDrawer(Gravity.LEFT);
+                        fragmentTransaction.commit();
                         return true;
                     case R.id.nav_4:
                         fragmentTransaction.replace(R.id.activity_main_fragment, new InfoFragment());
@@ -181,6 +183,21 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_toolbar, menu);
         //xml activity_main 가 menu 객체로 변환
         return true;
+    }
+
+    public void fragmentChange(Fragment fragment, boolean isBackStack) {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.activity_main_fragment, fragment);
+        drawer.closeDrawer(Gravity.LEFT);
+
+        if (isBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        }
+
+        fragmentTransaction.commit();
     }
 /*
     @Override

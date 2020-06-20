@@ -59,12 +59,12 @@ public class MainFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
 
-
         getView().findViewById(R.id.fragment_main_mapButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), CrimeMap.class);
-                startActivity(intent);
+                FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.activity_main_fragment, new CrimeMapMenuFragment());
+                fragmentTransaction.commit();
             }
         });
         getView().findViewById(R.id.fragment_main_callButton).setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.activity_main_fragment, new CallFragment());
+                fragmentTransaction.replace(R.id.activity_main_fragment, new CareMenuFragment());
                 fragmentTransaction.commit();
             }
         });
@@ -154,7 +154,7 @@ public class MainFragment extends Fragment {
                                         break;
                                     }
                                 }
-                                adapter.notifyDataSetChanged();
+                                publishProgress();
                             } else {
                                 //Log.d(TAG, "Error getting documents: ", task.getException());
                             }
@@ -166,8 +166,8 @@ public class MainFragment extends Fragment {
         @Override
         public void onProgressUpdate(Void... values){
             super.onProgressUpdate(values);
+            adapter.notifyDataSetChanged();
         }
-
     }
 
 }

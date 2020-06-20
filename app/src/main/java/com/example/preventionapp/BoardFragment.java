@@ -61,17 +61,11 @@ public class BoardFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_board, container, false);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onActivityCreated(Bundle b) {
-        super.onActivityCreated(b);
-        db = FirebaseFirestore.getInstance();
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        db = FirebaseFirestore.getInstance();
         this.contentsList = (ListView) getView().findViewById(R.id.fragment_board_LV_contentsList);
         this.boardContentsList = BoardContentsList.getboardContentsList();
         this.searchContentsList = new ArrayList<BoardContentsListItem>();
@@ -174,24 +168,35 @@ public class BoardFragment extends Fragment {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             BoardFragment.this.boardContentsList.clear();
                             if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    //Log.d(TAG, document.getId() + " => " + document.getData());
-                                    BoardFragment.this.boardContentsList.add(new BoardContentsListItem(
-                                            document.getData().get("title").toString(),
-                                            document.getData().get("nickname").toString(),
-                                            document.getTimestamp("date"),
-                                            document.getData().get("contents").toString(),
-                                            (Long) document.getData().get("replyNum"),
-                                            (Long) document.getData().get("recommendNum")
-                                    ));
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            //Log.d(TAG, document.getId() + " => " + document.getData());
+                                            BoardFragment.this.boardContentsList.add(new BoardContentsListItem(
+                                                    document.getData().get("title").toString(),
+                                                    document.getData().get("nickname").toString(),
+                                                    document.getTimestamp("date"),
+                                                    document.getData().get("contents").toString(),
+                                                    (Long) document.getData().get("replyNum"),
+                                                    (Long) document.getData().get("recommendNum")
+                                            ));
                                 }
-                                BoardFragment.this.updateList();
+                                publishProgress();
                             } else {
                                 //Log.d(TAG, "Error getting documents: ", task.getException());
                             }
                         }
                     });
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+            try{
+                BoardFragment.this.updateList();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

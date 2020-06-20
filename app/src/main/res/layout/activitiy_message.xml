@@ -15,7 +15,7 @@
         />
 
     <LinearLayout
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="300dp"
         android:paddingTop="25dp"
         android:paddingLeft="30dp"
@@ -43,15 +43,14 @@
             android:hint="메시지로 신고를 합니다. \n\n 신고 시 현재 위치와 상황에 대해 설명해주세요." />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="340dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
         <Button
             android:id="@+id/activity_message_btn_write"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="70dp"
             android:background="@color/colorPrimary"
             android:textColor="#ffffff"
             android:text="입력 완료"/>

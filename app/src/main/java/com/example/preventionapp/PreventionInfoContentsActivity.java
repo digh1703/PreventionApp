@@ -3,6 +3,9 @@ package com.example.preventionapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PreventionInfoContentsActivity extends AppCompatActivity {
+    androidx.appcompat.widget.Toolbar toolbar;
+
     TextView title;
     TextView preview;
     TextView contents;
@@ -30,6 +35,12 @@ public class PreventionInfoContentsActivity extends AppCompatActivity {
         int gp,cp;
         appInfo = AppInfo.getAppInfo();
         db = FirebaseFirestore.getInstance();
+
+        toolbar = (androidx.appcompat.widget.Toolbar)findViewById(R.id.toolbar);
+        setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         title = (TextView)findViewById(R.id.activity_preventionInfoContents_title);
         preview = (TextView)findViewById(R.id.activity_preventionInfoContents_preview);
@@ -69,5 +80,22 @@ public class PreventionInfoContentsActivity extends AppCompatActivity {
             contents.setText("contents");
         }
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

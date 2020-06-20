@@ -38,7 +38,7 @@
         <activity android:name=".BoardContentsWriteActivity" />
         <activity android:name=".SearchActivity"/>
 
-        <activity android:name=".CrimeMap"></activity>
+        <activity android:name=".CrimeMapMurderActivity"></activity>
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="0l8htuamay" />
@@ -46,6 +46,8 @@
         <activity android:name=".PreventionInfoContentsActivity" />
         <activity android:name=".DropdownAdapter" />
         <activity android:name=".myGroup" />
+
+        <activity android:name=".ETFSlideActivity"/>
 
 
     </application>

@@ -381,12 +381,23 @@ public class BoardContentsActivity extends AppCompatActivity implements AccessAc
                                             ));
                                         }
                                     }
-                                    updateList();
+                                    publishProgress();
                                 }
                             }
                         });
             }
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+            try{
+                BoardContentsActivity.this.updateList();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -483,7 +494,6 @@ public class BoardContentsActivity extends AppCompatActivity implements AccessAc
         }
     }
 
-
     private Boolean writerCheck(AppInfo appInfo, String nickname){
         if(appInfo.getUserData().getNickname().equals(nickname) ){
             return true;
@@ -492,7 +502,6 @@ public class BoardContentsActivity extends AppCompatActivity implements AccessAc
             return false;
         }
     }
-
 
     void updateList(){
         final Handler handler = new Handler();
@@ -514,7 +523,6 @@ public class BoardContentsActivity extends AppCompatActivity implements AccessAc
         });
         thread.start();
     }
-
 }
 
 

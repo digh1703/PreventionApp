@@ -47,7 +47,7 @@ public class DropdownAdapter extends BaseExpandableListAdapter {
                 imageview.setImageResource(R.drawable.people);
                 break;
             case "성폭력":
-                imageview.setImageResource(R.drawable.genderviolence);
+                imageview.setImageResource(R.drawable.rape);
                 break;
             case "폭력":
                 imageview.setImageResource(R.drawable.violence);

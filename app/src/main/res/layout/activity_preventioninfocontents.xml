@@ -63,13 +63,7 @@
         android:orientation="horizontal">
 
 
-        <Button
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorPrimary"
-            android:textColor="#ffffff"
-            android:text="다음 글"/>
+
     </LinearLayout>
 
 
